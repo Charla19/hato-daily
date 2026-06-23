@@ -707,6 +707,23 @@ body {
   }
 }
 
+.gallery-scroll-hint {
+  color: rgba(255, 255, 255, 0.72);
+  animation: gallery-hint-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gallery-hint-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(3px);
+  }
+}
+
 .gallery-scroll {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.35) transparent;

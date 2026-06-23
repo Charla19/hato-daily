@@ -88,10 +88,10 @@ export function OutfitGalleryModal({
             ref={(element) => {
               itemRefs.current[index] = element;
             }}
-            className="gallery-slide flex min-h-full flex-col items-center justify-center px-4 py-16"
+            className="gallery-slide box-border flex h-dvh max-h-dvh min-h-dvh flex-col items-center px-4 pb-8 pt-[4.5rem]"
             style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
           >
-            <div className="gallery-frame mb-4 flex h-[min(70vh,640px)] w-full max-w-lg items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3">
+            <div className="gallery-frame mb-3 flex min-h-0 w-full max-w-lg flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3">
               {outfit.imageUrl ? (
                 <img
                   src={outfit.imageUrl}
@@ -105,7 +105,7 @@ export function OutfitGalleryModal({
               )}
             </div>
 
-            <div className="text-center text-white">
+            <div className="shrink-0 text-center text-white">
               <p className="text-lg font-bold">{outfit.username}</p>
               <p className="mt-1 text-sm text-white/70">
                 {outfit.server}
@@ -127,7 +127,7 @@ export function OutfitGalleryModal({
             </div>
 
             {index < outfits.length - 1 && (
-              <p className="mt-8 animate-pulse text-xs text-white/40">
+              <p className="gallery-scroll-hint mt-4 shrink-0 text-sm font-semibold sm:mt-5 sm:text-base">
                 ↓ scroll for next look
               </p>
             )}
