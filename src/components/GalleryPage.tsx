@@ -62,7 +62,7 @@ export function GalleryPage() {
 
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
 
-        <section className="gallery-page-card rounded-[20px] border-[3px] border-[#ffe066] bg-[#fff6b8] p-4 shadow-[0_6px_0_#f0d060,0_10px_24px_rgba(61,74,92,0.1)] sm:p-5">
+        <section className="gallery-page-card rounded-[20px] border-[3px] border-[#b8e4ff] bg-[#dff5ff] p-4 shadow-[0_5px_0_rgba(61,74,92,0.08),0_8px_20px_rgba(61,74,92,0.07)] sm:p-5">
           <GifUploadForm
             hasPseudo={Boolean(pseudo)}
             uploadsRemaining={uploadsRemaining}

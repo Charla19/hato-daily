@@ -118,7 +118,7 @@ export function GifUploadForm({
             accept="image/gif"
             disabled={!canUpload}
             onChange={handleFileChange}
-            className="form-input w-full px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-[#ffe066] file:px-3 file:py-1 file:text-xs file:font-bold file:text-[#3d4a5c] disabled:opacity-60"
+            className="form-input w-full px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-[#b8e4ff] file:px-3 file:py-1 file:text-xs file:font-bold file:text-[#3d4a5c] disabled:opacity-60"
           />
         </div>
         <button
@@ -135,7 +135,7 @@ export function GifUploadForm({
           <img
             src={preview}
             alt="GIF preview"
-            className="max-h-28 rounded-xl border-2 border-[#ffe066] bg-white/70 object-contain p-1"
+            className="max-h-28 rounded-xl border-2 border-[#b8e4ff] bg-white/70 object-contain p-1"
           />
         </div>
       )}

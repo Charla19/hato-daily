@@ -33,7 +33,7 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
       <div
         className="panel-scroll-area panel-scroll-fade -mx-1 overflow-y-auto overscroll-y-contain px-1"
         style={{ maxHeight: GALLERY_GRID_MAX_HEIGHT }}
-        data-tone="lemon"
+        data-tone="sky"
       >
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
           {gifs.map((gif, index) => (
@@ -41,10 +41,10 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
               key={gif.id}
               type="button"
               onClick={() => openModal(index)}
-              className="gif-card group overflow-hidden rounded-xl border-2 border-[#ffe066] bg-white/70 p-1.5 text-left shadow-[0_3px_0_#f0d060] transition-transform hover:-translate-y-0.5"
+              className="gif-card group overflow-hidden rounded-xl border-2 border-[#b8e4ff] bg-white/70 p-1.5 text-left shadow-[0_3px_0_rgba(61,74,92,0.08)] transition-transform hover:-translate-y-0.5"
               aria-label={`Open GIF by ${gif.author}`}
             >
-              <div className="mb-1.5 overflow-hidden rounded-lg bg-[#fffef5]">
+              <div className="mb-1.5 overflow-hidden rounded-lg bg-[#f5fbff]">
                 <img
                   src={gif.imageUrl}
                   alt={`GIF by ${gif.author}`}
