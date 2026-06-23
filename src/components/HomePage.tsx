@@ -2,8 +2,7 @@
 
 import { useHatoDaily } from "@/hooks/useHatoDaily";
 import { AnnieNpc } from "@/components/AnnieNpc";
-import { GalleryNavButton } from "@/components/GalleryNavButton";
-import { GameDayLabel } from "@/components/GameDayLabel";
+import { SiteHeader } from "@/components/SiteHeader";
 import { DailyInfoSection } from "@/components/DailyInfoSection";
 import { FashionShowSection } from "@/components/FashionShowSection";
 import { ForestEdge } from "@/components/ForestEdge";
@@ -52,7 +51,6 @@ export function HomePage() {
       <ForestEdge />
       <FloatingCritters />
       <AnnieNpc />
-      <GalleryNavButton />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-6">
         {error && (
@@ -68,19 +66,7 @@ export function HomePage() {
         {winner ? (
           <WinnerBanner winner={winner} />
         ) : (
-          <div className="relative mb-4 rounded-[20px] border-[3px] border-[#ffe066] bg-[#fff6b8] p-3 shadow-[0_6px_0_#f0d060,0_10px_24px_rgba(61,74,92,0.1)] sm:mb-5 sm:p-5">
-            <div className="flex items-start justify-between gap-2 sm:block sm:text-center">
-              <div className="min-w-0 flex-1 sm:w-full">
-                <h1 className="font-[family-name:var(--font-fredoka)] text-lg font-bold leading-tight text-[#3d4a5c] sm:text-2xl">
-                  🌸 Hato Daily 🌸
-                </h1>
-                <p className="mt-0.5 text-[11px] leading-snug text-[#5c6b7a] sm:mt-1 sm:text-sm">
-                  Your cozy corner for Heartopia dailies
-                </p>
-              </div>
-              <GameDayLabel className="sm:absolute sm:right-4 sm:top-4" />
-            </div>
-          </div>
+          <SiteHeader showGalleryLink />
         )}
 
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
