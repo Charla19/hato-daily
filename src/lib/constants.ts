@@ -4,6 +4,9 @@ export const QUIZ_QUESTION_COUNT = 3;
 export const INTEL_PREVIEW_MAX_HEIGHT = "42vh";
 export const INTEL_MODAL_MAX_HEIGHT = "90vh";
 export const RUNWAY_PREVIEW_MAX_HEIGHT = "44vh";
+export const GALLERY_GRID_MAX_HEIGHT = "52vh";
+export const MAX_GIFS_PER_USER_PER_DAY = 5;
+export const MAX_GIF_FILE_BYTES = 8 * 1024 * 1024;
 
 export const INFO_TYPES = {
   fluorite: {

@@ -37,3 +37,14 @@ export type OutfitSubmission = {
   playerId: string;
   imageUrl: string;
 };
+
+export type GifReactionType = "haha" | "heart";
+
+export type GifEntry = {
+  id: string;
+  author: string;
+  imageUrl: string;
+  hahaVotes: number;
+  heartVotes: number;
+  userReaction?: GifReactionType;
+};

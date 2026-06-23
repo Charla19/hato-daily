@@ -2,6 +2,7 @@
 
 import { useHatoDaily } from "@/hooks/useHatoDaily";
 import { AnnieNpc } from "@/components/AnnieNpc";
+import { GalleryNavButton } from "@/components/GalleryNavButton";
 import { GameDayLabel } from "@/components/GameDayLabel";
 import { DailyInfoSection } from "@/components/DailyInfoSection";
 import { FashionShowSection } from "@/components/FashionShowSection";
@@ -51,6 +52,7 @@ export function HomePage() {
       <ForestEdge />
       <FloatingCritters />
       <AnnieNpc />
+      <GalleryNavButton />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-6">
         {error && (

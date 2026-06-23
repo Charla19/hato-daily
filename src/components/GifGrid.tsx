@@ -1,0 +1,74 @@
+"use client";
+
+import { useState } from "react";
+import { GifGalleryModal } from "@/components/GifGalleryModal";
+import { SeeAllButton } from "@/components/SeeAllButton";
+import { GALLERY_GRID_MAX_HEIGHT } from "@/lib/constants";
+import type { GifEntry, GifReactionType } from "@/lib/types";
+
+type GifGridProps = {
+  gifs: GifEntry[];
+  onReact: (id: string, reaction: GifReactionType) => void;
+};
+
+export function GifGrid({ gifs, onReact }: GifGridProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [startIndex, setStartIndex] = useState(0);
+
+  function openModal(index: number) {
+    setStartIndex(index);
+    setModalOpen(true);
+  }
+
+  if (gifs.length === 0) {
+    return (
+      <p className="py-8 text-center text-sm text-[var(--ink-soft)]">
+        No GIFs yet. Be the first to share a Heartopia moment!
+      </p>
+    );
+  }
+
+  return (
+    <>
+      <div
+        className="panel-scroll-area panel-scroll-fade -mx-1 overflow-y-auto overscroll-y-contain px-1"
+        style={{ maxHeight: GALLERY_GRID_MAX_HEIGHT }}
+        data-tone="lemon"
+      >
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+          {gifs.map((gif, index) => (
+            <button
+              key={gif.id}
+              type="button"
+              onClick={() => openModal(index)}
+              className="gif-card group overflow-hidden rounded-xl border-2 border-[#ffe066] bg-white/70 p-1.5 text-left shadow-[0_3px_0_#f0d060] transition-transform hover:-translate-y-0.5"
+              aria-label={`Open GIF by ${gif.author}`}
+            >
+              <div className="mb-1.5 overflow-hidden rounded-lg bg-[#fffef5]">
+                <img
+                  src={gif.imageUrl}
+                  alt={`GIF by ${gif.author}`}
+                  className="gif-card-img h-28 w-full object-cover transition-transform group-hover:scale-105 sm:h-32"
+                />
+              </div>
+              <p className="truncate px-0.5 text-xs font-bold text-[#3d4a5c]">{gif.author}</p>
+              <p className="px-0.5 text-[10px] text-[var(--ink-soft)]">
+                😂 {gif.hahaVotes} · ❤️ {gif.heartVotes}
+              </p>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <SeeAllButton count={gifs.length} onClick={() => openModal(0)} label="See all GIFs" />
+
+      <GifGalleryModal
+        gifs={gifs}
+        startIndex={startIndex}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onReact={(id, reaction) => void onReact(id, reaction)}
+      />
+    </>
+  );
+}

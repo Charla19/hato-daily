@@ -385,6 +385,10 @@ body {
   background: linear-gradient(to bottom, rgba(255, 214, 232, 0), #ffd6e8 88%);
 }
 
+.panel-scroll-fade[data-tone="lemon"]::after {
+  background: linear-gradient(to bottom, rgba(255, 246, 184, 0), #fff6b8 88%);
+}
+
 .btn-see-all:active {
   transform: translateY(1px);
 }
@@ -626,6 +630,71 @@ body {
 .runway-thumb:focus-visible {
   outline: 2px solid var(--coral);
   outline-offset: 2px;
+}
+
+/* ── GIF gallery ── */
+
+.gallery-nav-btn {
+  text-decoration: none;
+}
+
+.gallery-nav-btn-inner {
+  animation: gallery-nav-bob 3s ease-in-out infinite;
+}
+
+.gallery-nav-sparkle {
+  animation: gallery-nav-sparkle 1.8s ease-in-out infinite;
+}
+
+.gallery-nav-btn:hover .gallery-nav-btn-inner {
+  transform: translateY(-2px) scale(1.02);
+}
+
+@keyframes gallery-nav-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes gallery-nav-sparkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: rotate(18deg) scale(1.15);
+  }
+}
+
+.gif-card-img {
+  image-rendering: auto;
+}
+
+.gallery-react-btn {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.gallery-react-btn-heart {
+  background-color: rgba(255, 143, 171, 0.35);
+}
+
+.gallery-react-btn-active {
+  background-color: var(--coral) !important;
+  border-color: var(--coral-dark);
+  box-shadow: 0 4px 0 var(--coral-dark);
+  cursor: default;
+}
+
+.gallery-page-card {
+  animation: gentle-bob 5s ease-in-out infinite;
 }
 
 .runway-thumb-img {

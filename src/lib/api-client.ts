@@ -1,4 +1,4 @@
-import type { DailyInfo, OutfitEntry, OutfitSubmission, OutfitWinner } from "@/lib/types";
+import type { DailyInfo, GifEntry, GifReactionType, OutfitEntry, OutfitSubmission, OutfitWinner } from "@/lib/types";
 
 export type DashboardResponse = {
   dayKey: string;
@@ -9,6 +9,16 @@ export type DashboardResponse = {
   hasSubmittedToday: boolean;
   slotsRemaining: number;
   maxSlots: number;
+  pseudo: string | null;
+};
+
+export type GalleryResponse = {
+  dayKey: string;
+  resetLabel: string;
+  gifs: GifEntry[];
+  uploadsToday: number;
+  uploadsRemaining: number;
+  maxUploadsPerDay: number;
   pseudo: string | null;
 };
 
@@ -31,6 +41,18 @@ async function parseError(response: Response): Promise<string> {
 
 export async function fetchDashboard(voterId: string): Promise<DashboardResponse> {
   const response = await fetch(`/api/dashboard?voterId=${encodeURIComponent(voterId)}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(await parseError(response));
+  }
+
+  return response.json();
+}
+
+export async function fetchGallery(voterId: string): Promise<GalleryResponse> {
+  const response = await fetch(`/api/gallery?voterId=${encodeURIComponent(voterId)}`, {
     cache: "no-store",
   });
 
@@ -133,4 +155,41 @@ export async function voteOutfit(
 
   const body = await response.json();
   return body.outfit;
+}
+
+export async function submitGif(
+  voterId: string,
+  imageDataUrl: string,
+  pseudo: string,
+): Promise<{ gif: GifEntry; pseudo: string }> {
+  const response = await fetch("/api/gallery", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ voterId, imageDataUrl, pseudo }),
+  });
+
+  if (!response.ok) {
+    throw new Error(await parseError(response));
+  }
+
+  return response.json();
+}
+
+export async function reactToGif(
+  gifId: string,
+  voterId: string,
+  reaction: GifReactionType,
+): Promise<GifEntry> {
+  const response = await fetch(`/api/gallery/${gifId}/react`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ voterId, reaction }),
+  });
+
+  if (!response.ok) {
+    throw new Error(await parseError(response));
+  }
+
+  const body = await response.json();
+  return body.gif;
 }
