@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { OutfitEntry } from "@/lib/types";
 
 type OutfitGalleryModalProps = {
@@ -20,6 +21,11 @@ export function OutfitGalleryModal({
 }: OutfitGalleryModalProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -50,11 +56,11 @@ export function OutfitGalleryModal({
     });
   }, [open, startIndex]);
 
-  if (!open || outfits.length === 0) return null;
+  if (!open || !mounted || outfits.length === 0) return null;
 
-  return (
+  return createPortal(
     <div
-      className="gallery-overlay fixed inset-0 z-[60] bg-black/85"
+      className="gallery-overlay fixed inset-0 z-[100] bg-black/85"
       role="presentation"
     >
       <div className="gallery-chrome pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-4">
@@ -128,6 +134,7 @@ export function OutfitGalleryModal({
           </section>
         ))}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

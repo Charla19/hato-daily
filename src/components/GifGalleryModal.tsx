@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { GifEntry, GifReactionType } from "@/lib/types";
 
 type GifGalleryModalProps = {
@@ -20,6 +21,11 @@ export function GifGalleryModal({
 }: GifGalleryModalProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -50,10 +56,10 @@ export function GifGalleryModal({
     });
   }, [open, startIndex]);
 
-  if (!open || gifs.length === 0) return null;
+  if (!open || !mounted || gifs.length === 0) return null;
 
-  return (
-    <div className="gallery-overlay fixed inset-0 z-[60] bg-black/85" role="presentation">
+  return createPortal(
+    <div className="gallery-overlay fixed inset-0 z-[100] bg-black/85" role="presentation">
       <div className="gallery-chrome pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-4">
         <p className="pointer-events-auto rounded-full bg-black/50 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
           Scroll up and down · {gifs.length} GIF{gifs.length === 1 ? "" : "s"}
@@ -126,6 +132,7 @@ export function GifGalleryModal({
           </section>
         ))}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
