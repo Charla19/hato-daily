@@ -40,6 +40,12 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const toggleMuted = useCallback(() => {
     setMuted((current) => {
       const next = !current;
+      if (next) {
+        for (const audio of cacheRef.current.values()) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      }
       try {
         window.localStorage.setItem(STORAGE_KEY, next ? "1" : "0");
       } catch {
@@ -52,6 +58,11 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const playSound = useCallback(
     (sound: SoundId) => {
       if (!ready || muted) return;
+
+      for (const audio of cacheRef.current.values()) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
 
       const src = SOUND_FILES[sound];
       let audio = cacheRef.current.get(src);
