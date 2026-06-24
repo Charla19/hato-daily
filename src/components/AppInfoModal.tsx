@@ -65,7 +65,7 @@ const INFO_SECTIONS: InfoSection[] = [
     items: [
       "Use the Gallery button in the header.",
       `Post Heartopia GIFs or screenshots. ${MAX_GIFS_PER_USER_PER_DAY} per player per day.`,
-      "React with 😂 or ❤️. Tap a post for fullscreen scroll.",
+      "React with the emotion panel: 😂 ❤️ 😍 🐛 💫 🧠. Tap a post for fullscreen scroll.",
     ],
   },
   {

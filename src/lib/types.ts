@@ -38,13 +38,12 @@ export type OutfitSubmission = {
   imageUrl: string;
 };
 
-export type GifReactionType = "haha" | "heart";
+export type GifReactionType = "haha" | "heart" | "cute" | "bug" | "romance" | "brain";
 
 export type GifEntry = {
   id: string;
   author: string;
   imageUrl: string;
-  hahaVotes: number;
-  heartVotes: number;
+  reactionVotes: Record<GifReactionType, number>;
   userReaction?: GifReactionType;
 };

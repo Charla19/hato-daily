@@ -5,12 +5,19 @@ import { parseGalleryDataUrl } from "@/lib/gallery-upload";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import type { GifEntry, GifReactionType } from "@/lib/types";
 
+const GIF_SELECT =
+  "id, author, image_url, haha_votes, heart_votes, cute_votes, bug_votes, romance_votes, brain_votes";
+
 type GifRow = {
   id: string;
   author: string;
   image_url: string;
   haha_votes: number;
   heart_votes: number;
+  cute_votes?: number;
+  bug_votes?: number;
+  romance_votes?: number;
+  brain_votes?: number;
 };
 
 export type GalleryData = {
@@ -27,8 +34,14 @@ function mapGifRow(row: GifRow, userReaction?: GifReactionType): GifEntry {
     id: row.id,
     author: row.author,
     imageUrl: row.image_url,
-    hahaVotes: row.haha_votes,
-    heartVotes: row.heart_votes,
+    reactionVotes: {
+      haha: row.haha_votes,
+      heart: row.heart_votes,
+      cute: row.cute_votes ?? 0,
+      bug: row.bug_votes ?? 0,
+      romance: row.romance_votes ?? 0,
+      brain: row.brain_votes ?? 0,
+    },
     userReaction,
   };
 }
@@ -40,7 +53,7 @@ export async function fetchGallery(voterKey: string, ipHash?: string): Promise<G
   const [gifsResult, uploadCountResult] = await Promise.all([
     supabase
       .from("gif_submissions")
-      .select("id, author, image_url, haha_votes, heart_votes")
+      .select(GIF_SELECT)
       .eq("day_key", dayKey)
       .order("created_at", { ascending: false }),
     voterKey
@@ -139,7 +152,7 @@ export async function insertGifSubmission(input: {
       image_path: path,
       submitter_key: input.voterKey,
     })
-    .select("id, author, image_url, haha_votes, heart_votes")
+    .select(GIF_SELECT)
     .single();
 
   if (error) throw error;
@@ -166,7 +179,7 @@ export async function reactToGif(
     if (existing.reaction_type === reaction) {
       const { data, error } = await supabase
         .from("gif_submissions")
-        .select("id, author, image_url, haha_votes, heart_votes")
+        .select(GIF_SELECT)
         .eq("id", gifId)
         .single();
 
@@ -192,7 +205,7 @@ export async function reactToGif(
 
   const { data, error } = await supabase
     .from("gif_submissions")
-    .select("id, author, image_url, haha_votes, heart_votes")
+    .select(GIF_SELECT)
     .eq("id", gifId)
     .single();
 

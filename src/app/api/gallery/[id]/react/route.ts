@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { reactToGif } from "@/lib/db/gallery";
+import { isGifReactionType } from "@/lib/gallery-reactions";
 import { isSupabaseConfigured } from "@/lib/supabase/admin";
+
 import type { GifReactionType } from "@/lib/types";
 
 type ReactBody = {
@@ -24,8 +26,8 @@ export async function POST(
       return NextResponse.json({ error: "voterId is required." }, { status: 400 });
     }
 
-    if (body.reaction !== "haha" && body.reaction !== "heart") {
-      return NextResponse.json({ error: "reaction must be haha or heart." }, { status: 400 });
+    if (!isGifReactionType(body.reaction)) {
+      return NextResponse.json({ error: "Invalid reaction type." }, { status: 400 });
     }
 
     const gif = await reactToGif(id, body.voterId, body.reaction);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { GalleryReactionPanel } from "@/components/GalleryReactionPanel";
 import { GalleryScrollHint, useGalleryScrollHint } from "@/components/GalleryScrollHint";
 import { useSound } from "@/components/SoundProvider";
 import type { GifEntry, GifReactionType } from "@/lib/types";
@@ -62,7 +63,7 @@ export function GifGalleryModal({
   const { playSound } = useSound();
 
   function handleReact(gifId: string, reaction: GifReactionType) {
-    playSound(reaction === "haha" ? "haha" : "heart");
+    playSound(reaction);
     onReact(gifId, reaction);
   }
 
@@ -109,32 +110,10 @@ export function GifGalleryModal({
 
             <div className="gallery-slide-meta">
               <p className="text-lg font-bold">{gif.author}</p>
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => handleReact(gif.id, "haha")}
-                  className={`gallery-react-btn inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-transform ${
-                    gif.userReaction === "haha"
-                      ? "gallery-react-btn-active"
-                      : "hover:scale-105 active:scale-95"
-                  }`}
-                  aria-pressed={gif.userReaction === "haha"}
-                >
-                  😂 Haha · {gif.hahaVotes}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleReact(gif.id, "heart")}
-                  className={`gallery-react-btn gallery-react-btn-heart inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-transform ${
-                    gif.userReaction === "heart"
-                      ? "gallery-react-btn-active"
-                      : "hover:scale-105 active:scale-95"
-                  }`}
-                  aria-pressed={gif.userReaction === "heart"}
-                >
-                  ❤️ Heart · {gif.heartVotes}
-                </button>
-              </div>
+              <GalleryReactionPanel
+                gif={gif}
+                onReact={(reaction) => handleReact(gif.id, reaction)}
+              />
             </div>
           </section>
         ))}

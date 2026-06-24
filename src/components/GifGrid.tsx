@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { GifGalleryModal } from "@/components/GifGalleryModal";
+import { GalleryReactionSummary } from "@/components/GalleryReactionSummary";
 import { SeeAllButton } from "@/components/SeeAllButton";
 import { GALLERY_GRID_MAX_HEIGHT } from "@/lib/constants";
 import type { GifEntry, GifReactionType } from "@/lib/types";
@@ -52,9 +53,10 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
                 />
               </div>
               <p className="truncate px-0.5 text-xs font-bold text-[#3d4a5c]">{gif.author}</p>
-              <p className="px-0.5 text-[10px] text-[var(--ink-soft)]">
-                😂 {gif.hahaVotes} · ❤️ {gif.heartVotes}
-              </p>
+              <GalleryReactionSummary
+                gif={gif}
+                className="px-0.5 text-[10px] text-[var(--ink-soft)]"
+              />
             </button>
           ))}
         </div>

@@ -872,6 +872,114 @@ body {
   cursor: default;
 }
 
+.gallery-reaction-panel {
+  margin-top: 0.75rem;
+  width: 100%;
+  max-width: 22rem;
+}
+
+.gallery-reaction-panel-label {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-fredoka);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.gallery-reaction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.gallery-reaction-btn {
+  display: flex;
+  min-height: 4.1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  border-radius: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.gallery-reaction-btn:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.gallery-reaction-btn-active {
+  background: var(--coral) !important;
+  border-color: var(--coral-dark);
+  box-shadow: 0 3px 0 var(--coral-dark);
+}
+
+.gallery-reaction-btn-heart.gallery-reaction-btn-active {
+  background: #e2558a !important;
+  border-color: #c44d8a;
+  box-shadow: 0 3px 0 #9b2c6f;
+}
+
+.gallery-reaction-emoji {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.gallery-reaction-name {
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.1;
+  opacity: 0.92;
+}
+
+.gallery-reaction-count {
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.gallery-reaction-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.35rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.gallery-reaction-summary-item {
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .gallery-reaction-panel {
+    max-width: 24rem;
+  }
+
+  .gallery-reaction-grid {
+    gap: 0.55rem;
+  }
+
+  .gallery-reaction-btn {
+    min-height: 4.35rem;
+  }
+
+  .gallery-reaction-emoji {
+    font-size: 1.45rem;
+  }
+
+  .gallery-reaction-name {
+    font-size: 0.68rem;
+  }
+}
+
 .gallery-page-card {
   animation: gentle-bob 5s ease-in-out infinite;
 }

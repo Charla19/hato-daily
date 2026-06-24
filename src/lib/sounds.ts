@@ -1,6 +1,10 @@
 export const SOUND_FILES = {
   haha: "/sounds/fahhh.mp3",
   heart: "/sounds/nice.mp3",
+  cute: "/sounds/cute.mp3",
+  bug: "/sounds/bug.mp3",
+  romance: "/sounds/romance.mp3",
+  brain: "/sounds/brain.mp3",
   intelFalse: "/sounds/error.mp3",
 } as const;
 
