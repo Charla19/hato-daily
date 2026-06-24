@@ -93,24 +93,23 @@ export function OutfitGalleryModal({
             ref={(element) => {
               itemRefs.current[index] = element;
             }}
-            className="gallery-slide box-border flex h-dvh max-h-dvh min-h-dvh flex-col items-center px-4 pb-8 pt-[4.5rem]"
-            style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
+            className="gallery-slide"
           >
-            <div className="gallery-frame mb-3 flex min-h-0 w-full max-w-lg flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3">
+            <div className="gallery-frame gallery-frame-outfit">
               {outfit.imageUrl ? (
                 <img
                   src={outfit.imageUrl}
                   alt={`${outfit.username}'s outfit`}
-                  className="max-h-full max-w-full object-contain"
+                  className="gallery-slide-img"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center text-sm text-white/50">
+                <div className="flex h-32 w-full items-center justify-center text-sm text-white/50">
                   No image available
                 </div>
               )}
             </div>
 
-            <div className="shrink-0 text-center text-white">
+            <div className="gallery-slide-meta">
               <p className="text-lg font-bold">{outfit.username}</p>
               <p className="mt-1 text-sm text-white/70">
                 {outfit.server}

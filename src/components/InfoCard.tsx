@@ -1,3 +1,6 @@
+"use client";
+
+import { useSound } from "@/components/SoundProvider";
 import { INFO_TYPES } from "@/lib/constants";
 import type { DailyInfo } from "@/lib/types";
 
@@ -7,6 +10,7 @@ type InfoCardProps = {
 };
 
 export function InfoCard({ info, onVote }: InfoCardProps) {
+  const { playSound } = useSound();
   const config = INFO_TYPES[info.type];
   const isLocked = info.validated;
   const hasVoted = Boolean(info.userVote);
@@ -23,6 +27,14 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
     if (votedFalse) return "btn-react btn-react-false-selected";
     if (isLocked || hasVoted) return "btn-react btn-react-muted";
     return "btn-react btn-react-false";
+  }
+
+  function handleVote(vote: "true" | "false") {
+    if (isLocked || hasVoted) return;
+    if (vote === "false") {
+      playSound("intelFalse");
+    }
+    onVote?.(info.id, vote);
   }
 
   return (
@@ -49,7 +61,7 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
         <button
           type="button"
           disabled={isLocked || hasVoted}
-          onClick={() => onVote?.(info.id, "true")}
+          onClick={() => handleVote("true")}
           className={`${trueButtonClass()} mr-1.5 inline-block rounded-md border px-2.5 py-1 font-bold`}
           aria-pressed={votedTrue}
         >
@@ -58,7 +70,7 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
         <button
           type="button"
           disabled={isLocked || hasVoted}
-          onClick={() => onVote?.(info.id, "false")}
+          onClick={() => handleVote("false")}
           className={`${falseButtonClass()} inline-block rounded-md border px-2.5 py-1 font-bold`}
           aria-pressed={votedFalse}
         >

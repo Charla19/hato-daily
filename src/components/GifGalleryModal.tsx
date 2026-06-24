@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GalleryScrollHint, useGalleryScrollHint } from "@/components/GalleryScrollHint";
+import { useSound } from "@/components/SoundProvider";
 import type { GifEntry, GifReactionType } from "@/lib/types";
 
 type GifGalleryModalProps = {
@@ -58,6 +59,12 @@ export function GifGalleryModal({
   }, [open, startIndex]);
 
   const showScrollHint = useGalleryScrollHint(open, gifs.length, scrollRef, itemRefs);
+  const { playSound } = useSound();
+
+  function handleReact(gifId: string, reaction: GifReactionType) {
+    playSound(reaction === "haha" ? "haha" : "heart");
+    onReact(gifId, reaction);
+  }
 
   if (!open || !mounted || gifs.length === 0) return null;
 
@@ -90,23 +97,22 @@ export function GifGalleryModal({
             ref={(element) => {
               itemRefs.current[index] = element;
             }}
-            className="gallery-slide box-border flex h-dvh max-h-dvh min-h-dvh flex-col items-center px-4 pb-8 pt-[4.5rem]"
-            style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
+            className="gallery-slide"
           >
-            <div className="gallery-frame mb-3 flex min-h-0 w-full max-w-lg flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3">
+            <div className="gallery-frame">
               <img
                 src={gif.imageUrl}
                 alt={`Post by ${gif.author}`}
-                className="max-h-full max-w-full object-contain"
+                className="gallery-slide-img"
               />
             </div>
 
-            <div className="shrink-0 text-center text-white">
+            <div className="gallery-slide-meta">
               <p className="text-lg font-bold">{gif.author}</p>
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
                 <button
                   type="button"
-                  onClick={() => onReact(gif.id, "haha")}
+                  onClick={() => handleReact(gif.id, "haha")}
                   className={`gallery-react-btn inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-transform ${
                     gif.userReaction === "haha"
                       ? "gallery-react-btn-active"
@@ -118,7 +124,7 @@ export function GifGalleryModal({
                 </button>
                 <button
                   type="button"
-                  onClick={() => onReact(gif.id, "heart")}
+                  onClick={() => handleReact(gif.id, "heart")}
                   className={`gallery-react-btn gallery-react-btn-heart inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-transform ${
                     gif.userReaction === "heart"
                       ? "gallery-react-btn-active"

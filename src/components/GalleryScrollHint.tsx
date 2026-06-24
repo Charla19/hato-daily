@@ -11,7 +11,7 @@ export function GalleryScrollHint({ show, label = "Scroll to see more" }: Galler
   if (!show) return null;
 
   return (
-    <div className="gallery-scroll-hint-fixed pointer-events-none absolute inset-x-0 bottom-0 z-10">
+    <div className="gallery-scroll-hint-fixed pointer-events-none absolute inset-x-0 z-10">
       <p className="gallery-scroll-hint-inner">
         <span className="gallery-scroll-hint-arrow" aria-hidden="true">
           ↓
