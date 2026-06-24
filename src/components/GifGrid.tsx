@@ -23,7 +23,7 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
   if (gifs.length === 0) {
     return (
       <p className="py-8 text-center text-sm text-[var(--ink-soft)]">
-        No GIFs yet. Upload one from your clips.
+        No posts yet. Upload a GIF or screenshot.
       </p>
     );
   }
@@ -42,12 +42,12 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
               type="button"
               onClick={() => openModal(index)}
               className="gif-card group overflow-hidden rounded-xl border-2 border-[#b8e4ff] bg-white/70 p-1.5 text-left shadow-[0_3px_0_rgba(61,74,92,0.08)] transition-transform hover:-translate-y-0.5"
-              aria-label={`Open GIF by ${gif.author}`}
+              aria-label={`Open post by ${gif.author}`}
             >
               <div className="mb-1.5 overflow-hidden rounded-lg bg-[#f5fbff]">
                 <img
                   src={gif.imageUrl}
-                  alt={`GIF by ${gif.author}`}
+                  alt={`Post by ${gif.author}`}
                   className="gif-card-img h-28 w-full object-cover transition-transform group-hover:scale-105 sm:h-32"
                 />
               </div>
@@ -60,7 +60,7 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
         </div>
       </div>
 
-      <SeeAllButton count={gifs.length} onClick={() => openModal(0)} label="See all GIFs" />
+      <SeeAllButton count={gifs.length} onClick={() => openModal(0)} label="See all" />
 
       <GifGalleryModal
         gifs={gifs}

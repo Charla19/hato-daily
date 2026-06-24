@@ -67,9 +67,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ gif, pseudo });
   } catch (error) {
     console.error("POST /api/gallery", error);
-    const message = error instanceof Error ? error.message : "Failed to upload GIF.";
+    const message = error instanceof Error ? error.message : "Failed to upload.";
     const status =
-      message.includes("only upload") || message.includes("GIF") ? 409 : 500;
+      message.includes("only upload") || message.includes("per day") ? 409 : 500;
     return NextResponse.json({ error: message }, { status });
   }
 }

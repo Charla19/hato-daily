@@ -1,4 +1,4 @@
-import { VALIDATION_THRESHOLD, type InfoTypeId } from "@/lib/constants";
+import { INFO_TYPES, VALIDATION_THRESHOLD, type InfoTypeId } from "@/lib/constants";
 import { getCurrentDayKey, getPreviousDayKey } from "@/lib/day-key";
 import { getVisitorPseudo } from "@/lib/db/visitor";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
@@ -182,17 +182,17 @@ export async function createInfoReport(input: {
   const supabase = getSupabaseAdmin();
   const dayKey = getCurrentDayKey();
 
-  if (input.type === "roaming_oak") {
+  if (INFO_TYPES[input.type].lockOnValidation) {
     const { data: existing } = await supabase
       .from("info_reports")
       .select("id")
       .eq("day_key", dayKey)
-      .eq("type", "roaming_oak")
+      .eq("type", input.type)
       .eq("validated", true)
       .maybeSingle();
 
     if (existing) {
-      throw new Error("Roaming Oak is already confirmed for today.");
+      throw new Error(`${INFO_TYPES[input.type].label} is already confirmed for today.`);
     }
   }
 
@@ -242,7 +242,7 @@ export async function voteInfoReport(
   if (error) throw error;
 
   if (
-    data.type === "roaming_oak" &&
+    INFO_TYPES[data.type as InfoTypeId].lockOnValidation &&
     data.true_votes >= VALIDATION_THRESHOLD &&
     !data.validated
   ) {

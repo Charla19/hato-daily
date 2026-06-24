@@ -19,7 +19,7 @@ const INFO_SECTIONS: InfoSection[] = [
     emoji: "🌸",
     title: "What is Hato Daily?",
     items: [
-      "Daily board for Heartopia: fluorite/oak spots, outfit votes, GIFs.",
+      "Daily board for Heartopia: fluorite/oak spots, outfit votes, gallery.",
       "You can read everything without signing up. Set a pseudo before you post.",
     ],
   },
@@ -28,7 +28,7 @@ const INFO_SECTIONS: InfoSection[] = [
     title: "Daily reset",
     items: [
       "New day at 6:00 AM UTC (same as in-game dailies).",
-      "Intel, runway slots, GIF uploads, and votes clear when the timer hits zero.",
+      "Intel, runway slots, gallery uploads, and votes clear when the timer hits zero.",
     ],
   },
   {
@@ -45,7 +45,8 @@ const INFO_SECTIONS: InfoSection[] = [
     items: [
       "Post fluorite spots, roaming oak, weather, whatever helps today.",
       "✅ if it's right, ❌ if it's off. One vote per report.",
-      `Roaming Oak locks after ${VALIDATION_THRESHOLD}+ ✅ votes. One confirmed oak per day.`,
+      `Flawless Fluorite and Roaming Oak lock after ${VALIDATION_THRESHOLD}+ ✅ votes and rise to the top.`,
+      "One confirmed fluorite and one confirmed oak per day.",
     ],
   },
   {
@@ -60,11 +61,11 @@ const INFO_SECTIONS: InfoSection[] = [
   },
   {
     emoji: "🎬",
-    title: "GIF Gallery",
+    title: "Gallery",
     items: [
-      "Use the GIF Gallery button in the header.",
-      `Heartopia GIFs only. ${MAX_GIFS_PER_USER_PER_DAY} per player per day.`,
-      "React with 😂 or ❤️. Tap a GIF for fullscreen scroll.",
+      "Use the Gallery button in the header.",
+      `Post Heartopia GIFs or screenshots. ${MAX_GIFS_PER_USER_PER_DAY} per player per day.`,
+      "React with 😂 or ❤️. Tap a post for fullscreen scroll.",
     ],
   },
   {

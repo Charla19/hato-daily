@@ -27,7 +27,7 @@ export const MOCK_DAILY_INFO: DailyInfo[] = [
     positionId: "front-yard",
     trueVotes: 21,
     falseVotes: 0,
-    validated: false,
+    validated: true,
   },
   {
     id: "3",

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { GalleryScrollHint, useGalleryScrollHint } from "@/components/GalleryScrollHint";
 import type { GifEntry, GifReactionType } from "@/lib/types";
 
 type GifGalleryModalProps = {
@@ -56,13 +57,15 @@ export function GifGalleryModal({
     });
   }, [open, startIndex]);
 
+  const showScrollHint = useGalleryScrollHint(open, gifs.length, scrollRef, itemRefs);
+
   if (!open || !mounted || gifs.length === 0) return null;
 
   return createPortal(
     <div className="gallery-overlay fixed inset-0 z-[100] bg-black/85" role="presentation">
       <div className="gallery-chrome pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-4">
         <p className="pointer-events-auto rounded-full bg-black/50 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-          Scroll up and down · {gifs.length} GIF{gifs.length === 1 ? "" : "s"}
+          Scroll up and down · {gifs.length} post{gifs.length === 1 ? "" : "s"}
         </p>
         <button
           type="button"
@@ -73,6 +76,8 @@ export function GifGalleryModal({
           ✕ Close
         </button>
       </div>
+
+      <GalleryScrollHint show={showScrollHint} />
 
       <div
         ref={scrollRef}
@@ -91,7 +96,7 @@ export function GifGalleryModal({
             <div className="gallery-frame mb-3 flex min-h-0 w-full max-w-lg flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3">
               <img
                 src={gif.imageUrl}
-                alt={`GIF by ${gif.author}`}
+                alt={`Post by ${gif.author}`}
                 className="max-h-full max-w-full object-contain"
               />
             </div>
@@ -125,12 +130,6 @@ export function GifGalleryModal({
                 </button>
               </div>
             </div>
-
-            {index < gifs.length - 1 && (
-              <p className="gallery-scroll-hint mt-4 shrink-0 text-sm font-semibold sm:mt-5 sm:text-base">
-                ↓ scroll for next GIF
-              </p>
-            )}
           </section>
         ))}
       </div>

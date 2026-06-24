@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { MAX_GIF_FILE_BYTES, MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
+import { MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
+import { GALLERY_IMAGE_ACCEPT, validateGalleryFile } from "@/lib/gallery-upload";
 import { ResetCountdown, ResetCountdownPanel } from "@/components/ResetCountdown";
 
 type GifUploadFormProps = {
@@ -35,15 +36,9 @@ export function GifUploadForm({
       return;
     }
 
-    if (file.type !== "image/gif") {
-      setError("Only GIF files are allowed.");
-      setPreview(null);
-      event.target.value = "";
-      return;
-    }
-
-    if (file.size > MAX_GIF_FILE_BYTES) {
-      setError("GIF must be 8 MB or smaller.");
+    const validationError = validateGalleryFile(file);
+    if (validationError) {
+      setError(validationError);
       setPreview(null);
       event.target.value = "";
       return;
@@ -80,10 +75,10 @@ export function GifUploadForm({
     <form onSubmit={(event) => void handleSubmit(event)} className="gif-upload-form">
       <div className="mb-3 text-center">
         <h2 className="font-[family-name:var(--font-fredoka)] text-lg font-bold text-[#3d4a5c] sm:text-xl">
-          🎬 Heartopia GIF Wall
+          🎬 Heartopia Gallery
         </h2>
         <p className="mt-1 text-xs text-[var(--ink-soft)] sm:text-sm">
-          Heartopia moments only · 1 GIF at a time · {MAX_GIFS_PER_USER_PER_DAY} per player per day
+          GIFs or screenshots · Heartopia only · {MAX_GIFS_PER_USER_PER_DAY} per player per day
         </p>
       </div>
 
@@ -108,16 +103,16 @@ export function GifUploadForm({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
           <label
-            htmlFor="gif-upload"
+            htmlFor="gallery-upload"
             className="mb-1 block text-xs font-bold text-[var(--plum-dark)]"
           >
-            Pick your GIF
+            Pick a GIF or screenshot
           </label>
           <input
             ref={inputRef}
-            id="gif-upload"
+            id="gallery-upload"
             type="file"
-            accept="image/gif"
+            accept={GALLERY_IMAGE_ACCEPT}
             disabled={!canUpload}
             onChange={handleFileChange}
             className="form-input w-full px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-[#b8e4ff] file:px-3 file:py-1 file:text-xs file:font-bold file:text-[#3d4a5c] disabled:opacity-60"
@@ -128,7 +123,7 @@ export function GifUploadForm({
           disabled={!canUpload || !preview}
           className="btn-submit w-full rounded-xl px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60 sm:w-auto"
         >
-          {uploading ? "Uploading…" : "Share GIF"}
+          {uploading ? "Uploading…" : "Post to gallery"}
         </button>
       </div>
 
@@ -136,7 +131,7 @@ export function GifUploadForm({
         <div className="mt-3 flex justify-center">
           <img
             src={preview}
-            alt="GIF preview"
+            alt="Upload preview"
             className="max-h-28 rounded-xl border-2 border-[#b8e4ff] bg-white/70 object-contain p-1"
           />
         </div>
@@ -145,7 +140,7 @@ export function GifUploadForm({
       {error && <p className="mt-2 text-center text-xs font-semibold text-[#e53e3e]">{error}</p>}
       {success && (
         <p className="mt-2 text-center text-xs font-semibold text-[#38a169]">
-          GIF shared! It appears in the wall below.
+          Posted! It shows up in the wall below.
         </p>
       )}
     </form>

@@ -31,7 +31,7 @@ export function GalleryPage() {
         <ForestEdge />
         <AnnieNpc />
         <div className="relative z-10 flex min-h-[50vh] items-center justify-center px-4 py-16 text-center text-[#5c6b7a]">
-          <p className="text-lg font-semibold">Loading GIF gallery…</p>
+          <p className="text-lg font-semibold">Loading gallery…</p>
         </div>
       </div>
     );
@@ -57,7 +57,7 @@ export function GalleryPage() {
 
         <SiteHeader
           backHref="/"
-          subtitle="Your funniest Heartopia clips"
+          subtitle="GIFs and screenshots from Heartopia"
         />
 
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />

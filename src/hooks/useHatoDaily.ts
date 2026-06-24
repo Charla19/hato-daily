@@ -10,7 +10,7 @@ import {
   voteOutfit,
   type IntelSubmission,
 } from "@/lib/api-client";
-import { INFO_TYPES, type InfoTypeId } from "@/lib/constants";
+import { INFO_TYPES, VALIDATION_THRESHOLD, type InfoTypeId } from "@/lib/constants";
 import { normalizePseudoInput } from "@/lib/pseudo";
 import { MOCK_DAILY_INFO, MOCK_OUTFITS, MOCK_WINNER } from "@/lib/mock-data";
 import type { DailyInfo, OutfitEntry, OutfitSubmission, OutfitWinner } from "@/lib/types";
@@ -112,7 +112,7 @@ export function useHatoDaily() {
               vote === "true"
                 ? { ...info, trueVotes: info.trueVotes + 1, userVote: "true" }
                 : { ...info, falseVotes: info.falseVotes + 1, userVote: "false" };
-            if (INFO_TYPES[info.type].lockOnValidation && updated.trueVotes >= 20) {
+            if (INFO_TYPES[info.type].lockOnValidation && updated.trueVotes >= VALIDATION_THRESHOLD) {
               return { ...updated, validated: true };
             }
             return updated;

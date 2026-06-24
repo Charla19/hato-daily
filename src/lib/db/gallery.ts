@@ -1,6 +1,7 @@
 import { MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
 import { getCurrentDayKey } from "@/lib/day-key";
 import { getVisitorPseudo } from "@/lib/db/visitor";
+import { parseGalleryDataUrl } from "@/lib/gallery-upload";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import type { GifEntry, GifReactionType } from "@/lib/types";
 
@@ -90,18 +91,17 @@ export async function fetchGallery(voterKey: string, ipHash?: string): Promise<G
 
 export async function uploadGifImage(dayKey: string, dataUrl: string) {
   const supabase = getSupabaseAdmin();
-  const match = dataUrl.match(/^data:(image\/gif);base64,(.+)$/);
+  const parsed = parseGalleryDataUrl(dataUrl);
 
-  if (!match) {
-    throw new Error("Only GIF files are allowed.");
+  if (!parsed) {
+    throw new Error("Use a GIF, PNG, JPG, or WebP from Heartopia.");
   }
 
-  const buffer = Buffer.from(match[2], "base64");
-  const path = `${dayKey}/${crypto.randomUUID()}.gif`;
+  const path = `${dayKey}/${crypto.randomUUID()}.${parsed.extension}`;
 
   const { error: uploadError } = await supabase.storage
     .from("gif-gallery")
-    .upload(path, buffer, { contentType: "image/gif", upsert: false });
+    .upload(path, parsed.buffer, { contentType: parsed.mime, upsert: false });
 
   if (uploadError) throw uploadError;
 
@@ -125,7 +125,7 @@ export async function insertGifSubmission(input: {
 
   if (countError) throw countError;
   if ((count ?? 0) >= MAX_GIFS_PER_USER_PER_DAY) {
-    throw new Error(`You can only upload ${MAX_GIFS_PER_USER_PER_DAY} GIFs per day.`);
+    throw new Error(`You can only upload ${MAX_GIFS_PER_USER_PER_DAY} posts per day.`);
   }
 
   const { publicUrl, path } = await uploadGifImage(dayKey, input.imageDataUrl);

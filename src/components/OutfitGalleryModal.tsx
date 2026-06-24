@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { GalleryScrollHint, useGalleryScrollHint } from "@/components/GalleryScrollHint";
 import type { OutfitEntry } from "@/lib/types";
 
 type OutfitGalleryModalProps = {
@@ -56,6 +57,8 @@ export function OutfitGalleryModal({
     });
   }, [open, startIndex]);
 
+  const showScrollHint = useGalleryScrollHint(open, outfits.length, scrollRef, itemRefs);
+
   if (!open || !mounted || outfits.length === 0) return null;
 
   return createPortal(
@@ -76,6 +79,8 @@ export function OutfitGalleryModal({
           ✕ Close
         </button>
       </div>
+
+      <GalleryScrollHint show={showScrollHint} />
 
       <div
         ref={scrollRef}
@@ -125,12 +130,6 @@ export function OutfitGalleryModal({
                 {outfit.hasLiked ? `❤️ Liked · ${outfit.votes}` : `❤️ Like · ${outfit.votes}`}
               </button>
             </div>
-
-            {index < outfits.length - 1 && (
-              <p className="gallery-scroll-hint mt-4 shrink-0 text-sm font-semibold sm:mt-5 sm:text-base">
-                ↓ scroll for next look
-              </p>
-            )}
           </section>
         ))}
       </div>

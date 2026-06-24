@@ -179,9 +179,10 @@ export function InfoSubmissionForm({
               options={POSITION_OPTIONS}
               onChange={setPositionId}
             />
-            {infoType === "roaming_oak" && (
+            {config.lockOnValidation && (
               <p className="mb-2 text-xs text-[#2b6cb0]">
-                Roaming Oak locks after {VALIDATION_THRESHOLD} ✅ votes and rises to the top.
+                {config.label} locks after {VALIDATION_THRESHOLD} ✅ votes and rises to the top.
+                One confirmed spot per day.
               </p>
             )}
           </>
