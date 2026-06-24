@@ -5,6 +5,8 @@ export const SOUND_FILES = {
   bug: "/sounds/bug.mp3",
   romance: "/sounds/romance.mp3",
   brain: "/sounds/brain.mp3",
+  runwayHeart: "/sounds/runway-heart.mp3",
+  intelTrue: "/sounds/intel-true.mp3",
   intelFalse: "/sounds/error.mp3",
 } as const;
 

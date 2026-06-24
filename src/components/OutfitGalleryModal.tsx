@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GalleryScrollHint, useGalleryScrollHint } from "@/components/GalleryScrollHint";
+import { useSound } from "@/components/SoundProvider";
 import type { OutfitEntry } from "@/lib/types";
 
 type OutfitGalleryModalProps = {
@@ -58,6 +59,13 @@ export function OutfitGalleryModal({
   }, [open, startIndex]);
 
   const showScrollHint = useGalleryScrollHint(open, outfits.length, scrollRef, itemRefs);
+  const { playSound } = useSound();
+
+  function handleVote(outfit: OutfitEntry) {
+    if (outfit.hasLiked) return;
+    playSound("runwayHeart");
+    onVote(outfit.id);
+  }
 
   if (!open || !mounted || outfits.length === 0) return null;
 
@@ -117,7 +125,7 @@ export function OutfitGalleryModal({
               </p>
               <button
                 type="button"
-                onClick={() => onVote(outfit.id)}
+                onClick={() => handleVote(outfit)}
                 disabled={outfit.hasLiked}
                 className={`gallery-vote-btn mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white transition-transform ${
                   outfit.hasLiked

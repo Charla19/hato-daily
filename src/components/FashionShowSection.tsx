@@ -7,6 +7,7 @@ import { QuizModal } from "@/components/QuizModal";
 import { ResetCountdown, ResetCountdownPanel } from "@/components/ResetCountdown";
 import { RunwayQuizCta } from "@/components/RunwayQuizCta";
 import { SeeAllButton } from "@/components/SeeAllButton";
+import { useSound } from "@/components/SoundProvider";
 import { MAX_OUTFIT_SLOTS, RUNWAY_PREVIEW_MAX_HEIGHT } from "@/lib/constants";
 import type { OutfitEntry, OutfitSubmission } from "@/lib/types";
 
@@ -31,10 +32,17 @@ export function FashionShowSection({
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryStartIndex, setGalleryStartIndex] = useState(0);
   const slotsFull = slotsRemaining <= 0;
+  const { playSound } = useSound();
 
   function openGallery(index: number) {
     setGalleryStartIndex(index);
     setGalleryOpen(true);
+  }
+
+  function handleVote(outfitId: string, hasLiked: boolean) {
+    if (hasLiked) return;
+    playSound("runwayHeart");
+    onVote(outfitId);
   }
 
   return (
@@ -97,7 +105,7 @@ export function FashionShowSection({
                     </div>
                     <button
                       type="button"
-                      onClick={() => onVote(outfit.id)}
+                      onClick={() => handleVote(outfit.id, Boolean(outfit.hasLiked))}
                       disabled={outfit.hasLiked}
                       className={`w-full rounded-lg py-1 text-xs font-bold text-white ${
                         outfit.hasLiked ? "btn-vote-liked" : "btn-vote"

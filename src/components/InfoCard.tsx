@@ -31,7 +31,9 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
 
   function handleVote(vote: "true" | "false") {
     if (isLocked || hasVoted) return;
-    if (vote === "false") {
+    if (vote === "true") {
+      playSound("intelTrue");
+    } else {
       playSound("intelFalse");
     }
     onVote?.(info.id, vote);
