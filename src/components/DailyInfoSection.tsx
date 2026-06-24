@@ -29,7 +29,7 @@ export function DailyInfoSection({ items, onVote }: DailyInfoSectionProps) {
     <>
       <PanelCard tone="sky" title="Today's Intel" icon="📍" insect="dragonfly">
         {sortedItems.length === 0 ? (
-          <p className="text-sm text-[var(--ink-soft)]">Nothing posted yet. Be the first!</p>
+          <p className="text-sm text-[var(--ink-soft)]">Nothing yet. Drop a pin if you spotted something.</p>
         ) : (
           <>
             <div

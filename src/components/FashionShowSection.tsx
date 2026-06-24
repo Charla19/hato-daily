@@ -62,7 +62,7 @@ export function FashionShowSection({
 
         {outfits.length === 0 ? (
           <p className="py-4 text-center text-sm text-[var(--ink-soft)]">
-            No outfits yet. Be the first through the quiz!
+            No looks yet. Pass the quiz to upload yours.
           </p>
         ) : (
           <>
@@ -120,7 +120,7 @@ export function FashionShowSection({
         )}
 
         <p className="mt-2 text-center text-[11px] text-[var(--ink-soft)]">
-          Tap a look for full size, or open the scroll gallery from look #1.
+          Tap a look to view it bigger.
         </p>
       </PanelCard>
 

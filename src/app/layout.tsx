@@ -15,9 +15,9 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Hato Daily — Heartopia Community Hub",
+  title: "Hato Daily | Heartopia dailies",
   description:
-    "Daily Flawless Fluorite and Roaming Oak spots, community news, and outfit votes for Heartopia players.",
+    "Daily fluorite and roaming oak spots, outfit votes, and GIF wall for Heartopia players.",
 };
 
 export default function RootLayout({

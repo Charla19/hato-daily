@@ -31,12 +31,12 @@ export const FLUORITE_LOCATIONS: LocationOption[] = [
   ...PLOT_HOUSES,
   {
     id: "onsen-fluorite-mine",
-    label: "Onsen Mountain — Fluorite Mine (Stonehenge)",
+    label: "Onsen Mountain, Fluorite Mine (Stonehenge)",
     group: "Onsen Mountain",
   },
   {
     id: "onsen-other",
-    label: "Onsen Mountain — Other area",
+    label: "Onsen Mountain, other area",
     group: "Onsen Mountain",
   },
 ];
@@ -111,5 +111,5 @@ export function formatLocationLabel(
 
   if (!position) return locationLabel;
 
-  return `${locationLabel} — ${position.label}`;
+  return `${locationLabel}, ${position.label}`;
 }

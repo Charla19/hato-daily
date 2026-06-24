@@ -23,7 +23,7 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
   if (gifs.length === 0) {
     return (
       <p className="py-8 text-center text-sm text-[var(--ink-soft)]">
-        No GIFs yet. Be the first to share a Heartopia moment!
+        No GIFs yet. Upload one from your clips.
       </p>
     );
   }

@@ -45,7 +45,7 @@ export function ResetCountdownPanel({ tone = "pink", className = "" }: ResetCoun
         <span className="reset-countdown-sep">:</span>
         <span className="reset-countdown-part reset-countdown-seconds">{pad2(seconds)}s</span>
       </p>
-      <p className="reset-countdown-hint">Fresh intel, runway & GIFs when the clock hits zero</p>
+      <p className="reset-countdown-hint">Intel, runway and GIFs refresh when this hits zero</p>
     </div>
   );
 }

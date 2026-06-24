@@ -209,7 +209,7 @@ export function InfoSubmissionForm({
 
         {!hasPseudo && (
           <p className="mb-2 rounded-xl border-2 border-[#ffc0a0] bg-[var(--bg-peach)] px-2 py-1.5 text-xs text-[#9b4d1a]">
-            Choose your display name above before posting.
+            Choose your pseudo above before posting.
           </p>
         )}
 
@@ -224,7 +224,7 @@ export function InfoSubmissionForm({
           disabled={isTypeLocked || !hasPseudo}
           className="btn-submit mt-1 w-full rounded-xl py-2.5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {hasPseudo ? `Submit as ${pseudo}` : "Submit to the community"}
+          {hasPseudo ? `Post as ${pseudo}` : "Post intel"}
         </button>
       </form>
     </PanelCard>

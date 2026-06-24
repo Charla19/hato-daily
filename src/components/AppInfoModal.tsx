@@ -19,60 +19,60 @@ const INFO_SECTIONS: InfoSection[] = [
     emoji: "🌸",
     title: "What is Hato Daily?",
     items: [
-      "A community board for Heartopia dailies: intel spots, outfit votes, and GIF laughs.",
-      "Everyone can read posts. You need a display name before sharing anything.",
+      "Daily board for Heartopia: fluorite/oak spots, outfit votes, GIFs.",
+      "You can read everything without signing up. Set a pseudo before you post.",
     ],
   },
   {
     emoji: "⏳",
     title: "Daily reset",
     items: [
-      "A new Heartopia day starts at 6:00 AM UTC (same rhythm as in-game dailies).",
-      "Intel, runway uploads, GIF uploads, and votes refresh when the countdown hits zero.",
+      "New day at 6:00 AM UTC (same as in-game dailies).",
+      "Intel, runway slots, GIF uploads, and votes clear when the timer hits zero.",
     ],
   },
   {
     emoji: "👤",
-    title: "Your display name",
+    title: "Your pseudo",
     items: [
-      "Pick a pseudo once so others know who posted.",
-      "It is saved for your connection. A new network may ask you to set it again.",
+      "Pick a name once so people know it's you.",
+      "Tied to your connection. New network = set it again.",
     ],
   },
   {
     emoji: "📍",
     title: "Today's Intel",
     items: [
-      "Share Flawless Fluorite spots, Roaming Oak sightings, weather, or other tips.",
-      "Vote ✅ if it looks right, ❌ if not. One vote per report.",
-      `Roaming Oak locks at ${VALIDATION_THRESHOLD}+ ✅ votes — only one confirmed oak per day.`,
+      "Post fluorite spots, roaming oak, weather, whatever helps today.",
+      "✅ if it's right, ❌ if it's off. One vote per report.",
+      `Roaming Oak locks after ${VALIDATION_THRESHOLD}+ ✅ votes. One confirmed oak per day.`,
     ],
   },
   {
     emoji: "👗",
     title: "Today's Runway",
     items: [
-      "Tap the pink quiz button at the top of the Runway panel.",
-      "Answer 3 Heartopia questions with a perfect score to earn an upload slot.",
-      `First ${MAX_OUTFIT_SLOTS} players per day can post a look. Others can ❤️ vote.`,
-      "Yesterday's most liked look becomes today's Style Icon in the header.",
+      "Hit the pink quiz button on the Runway panel.",
+      "Answer 3 Heartopia questions. You need all 3 right to upload.",
+      `First ${MAX_OUTFIT_SLOTS} players per day get a slot. Everyone else can ❤️ vote.`,
+      "Yesterday's top look shows up as today's Style Icon.",
     ],
   },
   {
     emoji: "🎬",
     title: "GIF Gallery",
     items: [
-      "Open GIF Gallery from the header button on the home page.",
-      `Upload Heartopia GIFs only — ${MAX_GIFS_PER_USER_PER_DAY} per player per day.`,
-      "React with 😂 Haha or ❤️ Heart. Tap a GIF for full-screen scroll view.",
+      "Use the GIF Gallery button in the header.",
+      `Heartopia GIFs only. ${MAX_GIFS_PER_USER_PER_DAY} per player per day.`,
+      "React with 😂 or ❤️. Tap a GIF for fullscreen scroll.",
     ],
   },
   {
     emoji: "🤝",
-    title: "Play fair",
+    title: "Keep it honest",
     items: [
-      "Post real in-game info. No spam, hate, or off-topic uploads.",
-      "Be kind — this is a fan space made by players, for players.",
+      "Real in-game info only. No spam or off-topic stuff.",
+      "It's a fan site. Be decent to each other.",
     ],
   },
 ];
@@ -120,7 +120,7 @@ export function AppInfoModal({ open, onClose }: AppInfoModalProps) {
               ℹ️ How Hato Daily works
             </h2>
             <p className="mt-1 text-xs text-[var(--ink-soft)] sm:text-sm">
-              Quick guide for new and returning players
+              Stuff to know before you post
             </p>
           </div>
           <button

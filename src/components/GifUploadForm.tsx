@@ -95,7 +95,7 @@ export function GifUploadForm({
 
       {!hasPseudo && (
         <p className="mb-3 rounded-xl bg-white/60 px-3 py-2 text-center text-xs font-semibold text-[#7a6b52]">
-          Set your display name above before uploading.
+          Set your pseudo above before uploading.
         </p>
       )}
 

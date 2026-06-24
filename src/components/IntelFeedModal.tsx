@@ -65,7 +65,7 @@ export function IntelFeedModal({ items, open, onClose, onVote }: IntelFeedModalP
               📍 Today&apos;s Intel
             </h3>
             <p className="mt-1 text-sm text-[var(--ink-soft)]">
-              {sortedItems.length} community report{sortedItems.length === 1 ? "" : "s"} today
+              {sortedItems.length} tip{sortedItems.length === 1 ? "" : "s"} posted today
             </p>
           </div>
           <button
@@ -84,7 +84,7 @@ export function IntelFeedModal({ items, open, onClose, onVote }: IntelFeedModalP
         >
           {sortedItems.length === 0 ? (
             <p className="py-6 text-center text-sm text-[var(--ink-soft)]">
-              Nothing posted yet. Be the first!
+              Nothing yet. Drop a pin if you spotted something.
             </p>
           ) : (
             sortedItems.map((info) => (

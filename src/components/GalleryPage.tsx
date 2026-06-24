@@ -57,7 +57,7 @@ export function GalleryPage() {
 
         <SiteHeader
           backHref="/"
-          subtitle="Share your funniest Heartopia GIF moments"
+          subtitle="Your funniest Heartopia clips"
         />
 
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />

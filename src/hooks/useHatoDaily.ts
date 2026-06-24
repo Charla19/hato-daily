@@ -26,7 +26,7 @@ export function useHatoDaily() {
   const [winner, setWinner] = useState<OutfitWinner | null>(null);
   const [hasSubmittedToday, setHasSubmittedToday] = useState(false);
   const [slotsRemaining, setSlotsRemaining] = useState(50);
-  const [resetLabel, setResetLabel] = useState("—");
+  const [resetLabel, setResetLabel] = useState("...");
 
   const voterId = useMemo(() => getVoterId(), []);
 
@@ -40,7 +40,7 @@ export function useHatoDaily() {
     setResetLabel("12h 0m");
     setIsLive(false);
     setError(
-      "Supabase not configured — showing demo data. Copy .env.local.example to .env.local and run the SQL migration.",
+      "Supabase not configured. Showing demo data. Copy .env.local.example to .env.local and run the SQL migration.",
     );
   }, []);
 
@@ -133,7 +133,7 @@ export function useHatoDaily() {
     async (payload: Omit<IntelSubmission, "pseudo">) => {
       const rawPseudo = pseudo ? normalizePseudoInput(pseudo) : "";
       if (!rawPseudo) {
-        throw new Error("Set your display name before posting.");
+        throw new Error("Set your pseudo before posting.");
       }
 
       if (!isLive) {

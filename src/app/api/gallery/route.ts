@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
     const pseudoSource = normalizePseudoInput(body.pseudo ?? "");
     if (!pseudoSource) {
-      return NextResponse.json({ error: "Set your display name before uploading." }, { status: 400 });
+      return NextResponse.json({ error: "Set your pseudo before uploading." }, { status: 400 });
     }
 
     const gif = await insertGifSubmission({

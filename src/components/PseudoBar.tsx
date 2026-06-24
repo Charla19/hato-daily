@@ -25,7 +25,7 @@ export function PseudoBar({ pseudo, onSave, isLive }: PseudoBarProps) {
     event.preventDefault();
     const raw = normalizePseudoInput(value);
     if (!raw) {
-      setError("Pick a display name first.");
+      setError("Pick a pseudo first.");
       return;
     }
 
@@ -49,7 +49,7 @@ export function PseudoBar({ pseudo, onSave, isLive }: PseudoBarProps) {
         <form onSubmit={(event) => void handleSave(event)} className="flex flex-col gap-2 sm:flex-row sm:items-end">
           <div className="flex-1">
             <label htmlFor="pseudo-edit" className="mb-1 block text-xs font-bold text-[var(--plum-dark)]">
-              Your display name
+              Your pseudo
             </label>
             <div className="flex items-center gap-1">
               <span className="text-sm font-bold text-[var(--ink-soft)]">@</span>
@@ -101,7 +101,7 @@ export function PseudoBar({ pseudo, onSave, isLive }: PseudoBarProps) {
       ) : (
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-[var(--ink-soft)]">
-            Set a display name so people know who posted.
+            Set a pseudo so people know who posted.
           </p>
           <button
             type="button"

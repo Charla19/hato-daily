@@ -189,13 +189,13 @@ export function QuizModal({
             <div className="text-center">
               <div className="mb-4 text-4xl">👗</div>
               <p className="mb-2 text-sm font-semibold text-[#4a5568]">
-                Want on today&apos;s runway? Beat the quiz first!
+                Want on today&apos;s runway? Pass the quiz first.
               </p>
               <ul className="mb-5 space-y-2 text-left text-sm text-[var(--ink-soft)]">
                 <li>• Answer {QUIZ_QUESTION_COUNT} Heartopia trivia questions</li>
-                <li>• Perfect score only. One wrong answer and you retry.</li>
+                <li>• Get all {QUIZ_QUESTION_COUNT} right or you retry</li>
                 <li>• First {MAX_OUTFIT_SLOTS} players to pass get an upload slot</li>
-                <li>• Community votes for 24h. Top look becomes tomorrow&apos;s star.</li>
+                <li>• Votes run 24h. Top look becomes tomorrow&apos;s Style Icon</li>
               </ul>
               <button
                 type="button"
@@ -393,7 +393,7 @@ export function QuizModal({
                 You&apos;re on the runway!
               </p>
               <p className="mb-5 text-sm text-[var(--ink-soft)]">
-                Your outfit is live. Rally votes from the community. Top look gets featured tomorrow!
+                Your outfit is live. Ask friends to vote. Top look gets featured tomorrow!
               </p>
               <button
                 type="button"

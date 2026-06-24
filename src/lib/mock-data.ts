@@ -12,7 +12,7 @@ export const MOCK_DAILY_INFO: DailyInfo[] = [
   {
     id: "1",
     type: "roaming_oak",
-    description: "Home Plot 7 — Left side, near road",
+    description: "Home Plot 7, left side, near road",
     locationId: "plot-house-7",
     positionId: "front-yard",
     trueVotes: 24,
@@ -22,7 +22,7 @@ export const MOCK_DAILY_INFO: DailyInfo[] = [
   {
     id: "2",
     type: "fluorite",
-    description: "Home Plot 6 — Left side, near road",
+    description: "Home Plot 6, left side, near road",
     locationId: "plot-house-6",
     positionId: "front-yard",
     trueVotes: 21,

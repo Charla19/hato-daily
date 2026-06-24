@@ -982,28 +982,28 @@ body {
   width: 3.25rem;
   align-items: center;
   justify-content: center;
-  border: 3px solid #cbb8ff;
+  border: 3px solid #ffe066;
   border-radius: 999px;
-  background: linear-gradient(145deg, #e4d9ff 0%, #cbb8ff 100%);
+  background: linear-gradient(145deg, #fff6b8 0%, #ffe066 100%);
   box-shadow:
-    0 5px 0 #9b7ede,
+    0 5px 0 #e8c840,
     0 10px 22px rgba(61, 74, 92, 0.2);
   color: #3d4a5c;
   cursor: pointer;
-  animation: app-info-fab-glow 2.8s ease-in-out infinite;
+  animation: app-info-fab-bounce 1.6s ease-in-out infinite;
 }
 
 .app-info-fab:hover {
   animation-play-state: paused;
-  transform: translateY(-1px) scale(1.04);
+  transform: translateY(-2px) scale(1.06);
 }
 
 .app-info-fab-ring {
   position: absolute;
   inset: -5px;
-  border: 2px dashed rgba(155, 126, 222, 0.55);
+  border: 2px dashed rgba(232, 200, 64, 0.75);
   border-radius: 999px;
-  animation: app-info-fab-spin 10s linear infinite;
+  animation: app-info-fab-ring-pulse 1.6s ease-in-out infinite;
 }
 
 .app-info-fab-icon {
@@ -1048,26 +1048,55 @@ body {
   scrollbar-color: rgba(61, 74, 92, 0.25) transparent;
 }
 
-@keyframes app-info-fab-glow {
+@keyframes app-info-fab-bounce {
   0%,
   100% {
+    transform: translateY(0) scale(1);
     box-shadow:
-      0 5px 0 #9b7ede,
-      0 0 0 rgba(155, 126, 222, 0);
+      0 5px 0 #e8c840,
+      0 8px 16px rgba(240, 196, 48, 0.2);
   }
-  50% {
+  25% {
+    transform: translateY(-10px) scale(1.06);
     box-shadow:
-      0 6px 0 #9b7ede,
-      0 0 18px rgba(155, 126, 222, 0.45);
+      0 14px 0 #e8c840,
+      0 0 22px rgba(255, 224, 102, 0.55);
+  }
+  45% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 5px 0 #e8c840,
+      0 8px 16px rgba(240, 196, 48, 0.2);
+  }
+  60% {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow:
+      0 9px 0 #e8c840,
+      0 0 14px rgba(255, 224, 102, 0.35);
+  }
+  75% {
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes app-info-fab-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes app-info-fab-ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.65;
   }
-  to {
-    transform: rotate(360deg);
+  25% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+  45%,
+  75% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 0.9;
   }
 }
 

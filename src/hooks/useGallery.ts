@@ -19,7 +19,7 @@ export function useGallery() {
   const [pseudo, setPseudo] = useState<string | null>(null);
   const [gifs, setGifs] = useState<GifEntry[]>([]);
   const [uploadsRemaining, setUploadsRemaining] = useState(MAX_GIFS_PER_USER_PER_DAY);
-  const [resetLabel, setResetLabel] = useState("—");
+  const [resetLabel, setResetLabel] = useState("...");
 
   const voterId = useMemo(() => getVoterId(), []);
 
@@ -43,7 +43,7 @@ export function useGallery() {
         setResetLabel("12h 0m");
         setIsLive(false);
         setError(
-          "Supabase not configured — gallery uploads need a live database. Run migration 004_gif_gallery.sql.",
+          "Supabase not configured. Gallery uploads need a live database. Run migration 004_gif_gallery.sql.",
         );
       } else {
         setError(message);
@@ -78,7 +78,7 @@ export function useGallery() {
     async (imageDataUrl: string) => {
       const rawPseudo = pseudo ? normalizePseudoInput(pseudo) : "";
       if (!rawPseudo) {
-        throw new Error("Set your display name before uploading.");
+        throw new Error("Set your pseudo before uploading.");
       }
 
       if (!isLive) {
