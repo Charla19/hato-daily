@@ -7,6 +7,7 @@ import { ForestEdge } from "@/components/ForestEdge";
 import { GifGrid } from "@/components/GifGrid";
 import { GifUploadForm } from "@/components/GifUploadForm";
 import { PseudoBar } from "@/components/PseudoBar";
+import { SiteChromeExtras } from "@/components/SiteChromeExtras";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhimsyBackground } from "@/components/WhimsyBackground";
 
@@ -18,7 +19,6 @@ export function GalleryPage() {
     pseudo,
     gifs,
     uploadsRemaining,
-    resetLabel,
     savePseudo,
     uploadGif,
     reactGif,
@@ -66,7 +66,6 @@ export function GalleryPage() {
           <GifUploadForm
             hasPseudo={Boolean(pseudo)}
             uploadsRemaining={uploadsRemaining}
-            resetLabel={resetLabel}
             isLive={isLive}
             onUpload={uploadGif}
           />
@@ -75,6 +74,8 @@ export function GalleryPage() {
 
           <GifGrid gifs={gifs} onReact={reactGif} />
         </section>
+
+        <SiteChromeExtras />
       </div>
     </div>
   );

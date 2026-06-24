@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { GameDayLabel } from "@/components/GameDayLabel";
 import { GalleryNavButton } from "@/components/GalleryNavButton";
@@ -7,6 +8,8 @@ type SiteHeaderProps = {
   backLabel?: string;
   subtitle?: string;
   showGalleryLink?: boolean;
+  className?: string;
+  children?: ReactNode;
 };
 
 export function SiteHeader({
@@ -14,6 +17,8 @@ export function SiteHeader({
   backLabel = "← Back home",
   subtitle = "Your cozy corner for Heartopia dailies",
   showGalleryLink = false,
+  className = "",
+  children,
 }: SiteHeaderProps) {
   const titleBlock = (
     <>
@@ -25,7 +30,9 @@ export function SiteHeader({
   );
 
   return (
-    <div className="relative mb-4 rounded-[20px] border-[3px] border-[#ffe066] bg-[#fff6b8] p-3 shadow-[0_6px_0_#f0d060,0_10px_24px_rgba(61,74,92,0.1)] sm:mb-5 sm:p-5">
+    <div
+      className={`relative mb-4 rounded-[20px] border-[3px] border-[#ffe066] bg-[#fff6b8] p-3 shadow-[0_6px_0_#f0d060,0_10px_24px_rgba(61,74,92,0.1)] sm:mb-5 sm:p-5 ${className}`}
+    >
       {backHref && (
         <Link
           href={backHref}
@@ -64,6 +71,8 @@ export function SiteHeader({
 
         <div className={`text-center ${showGalleryLink ? "px-24" : "px-16"}`}>{titleBlock}</div>
       </div>
+
+      {children}
     </div>
   );
 }

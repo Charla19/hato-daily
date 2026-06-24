@@ -4,6 +4,8 @@ import { useState } from "react";
 import { OutfitGalleryModal } from "@/components/OutfitGalleryModal";
 import { PanelCard } from "@/components/PanelCard";
 import { QuizModal } from "@/components/QuizModal";
+import { ResetCountdown, ResetCountdownPanel } from "@/components/ResetCountdown";
+import { RunwayQuizCta } from "@/components/RunwayQuizCta";
 import { SeeAllButton } from "@/components/SeeAllButton";
 import { MAX_OUTFIT_SLOTS, RUNWAY_PREVIEW_MAX_HEIGHT } from "@/lib/constants";
 import type { OutfitEntry, OutfitSubmission } from "@/lib/types";
@@ -11,7 +13,6 @@ import type { OutfitEntry, OutfitSubmission } from "@/lib/types";
 type FashionShowSectionProps = {
   outfits: OutfitEntry[];
   slotsRemaining: number;
-  resetLabel: string;
   hasSubmittedToday: boolean;
   defaultUsername?: string;
   onVote: (id: string) => void;
@@ -21,7 +22,6 @@ type FashionShowSectionProps = {
 export function FashionShowSection({
   outfits,
   slotsRemaining,
-  resetLabel,
   hasSubmittedToday,
   defaultUsername = "",
   onVote,
@@ -40,11 +40,7 @@ export function FashionShowSection({
   return (
     <>
       <PanelCard tone="pink" title="Today's Runway" icon="👗" insect="butterfly-orange">
-        <div className="alert-quiz mb-3 rounded-xl px-2 py-2 text-center text-xs">
-          <strong>Quiz time!</strong>
-          <br />
-          {slotsRemaining}/{MAX_OUTFIT_SLOTS} upload slots left today.
-        </div>
+        <ResetCountdownPanel tone="pink" className="mb-3" />
 
         {hasSubmittedToday ? (
           <div className="status-ok mb-3 rounded-xl px-3 py-3 text-center">
@@ -57,22 +53,12 @@ export function FashionShowSection({
           <div className="status-full mb-3 rounded-xl px-3 py-3 text-center">
             <p className="text-sm font-bold">🚪 Dressing room full</p>
             <p className="mt-1 text-xs text-[var(--ink-soft)]">
-              All {MAX_OUTFIT_SLOTS} slots claimed. Reset in {resetLabel}.
+              All {MAX_OUTFIT_SLOTS} slots claimed. Reset in <ResetCountdown />.
             </p>
           </div>
         ) : (
-          <button
-            type="button"
-            onClick={() => setQuizOpen(true)}
-            className="btn-runway-cta mb-3 w-full rounded-xl py-3 text-sm font-bold text-white"
-          >
-            🎮 Beat the Quiz, Enter the Runway
-          </button>
+          <RunwayQuizCta slotsRemaining={slotsRemaining} onClick={() => setQuizOpen(true)} />
         )}
-
-        <p className="mb-3 text-center text-[11px] text-[var(--ink-soft)]">
-          3 questions, perfect score, first {MAX_OUTFIT_SLOTS} winners upload
-        </p>
 
         {outfits.length === 0 ? (
           <p className="py-4 text-center text-sm text-[var(--ink-soft)]">
@@ -135,10 +121,6 @@ export function FashionShowSection({
 
         <p className="mt-2 text-center text-[11px] text-[var(--ink-soft)]">
           Tap a look for full size, or open the scroll gallery from look #1.
-        </p>
-
-        <p className="mt-1 text-center text-xs text-[var(--ink-soft)]">
-          Votes and submissions reset in {resetLabel}.
         </p>
       </PanelCard>
 

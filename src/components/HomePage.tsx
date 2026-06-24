@@ -2,6 +2,7 @@
 
 import { useHatoDaily } from "@/hooks/useHatoDaily";
 import { AnnieNpc } from "@/components/AnnieNpc";
+import { SiteChromeExtras } from "@/components/SiteChromeExtras";
 import { SiteHeader } from "@/components/SiteHeader";
 import { DailyInfoSection } from "@/components/DailyInfoSection";
 import { FashionShowSection } from "@/components/FashionShowSection";
@@ -23,7 +24,6 @@ export function HomePage() {
     winner,
     hasSubmittedToday,
     slotsRemaining,
-    resetLabel,
     lockedTypes,
     savePseudo,
     voteInfo,
@@ -86,7 +86,6 @@ export function HomePage() {
             <FashionShowSection
               outfits={outfits}
               slotsRemaining={slotsRemaining}
-              resetLabel={resetLabel}
               hasSubmittedToday={hasSubmittedToday}
               defaultUsername={pseudo ? pseudo.replace(/^@/, "") : ""}
               onVote={(id) => void likeOutfit(id)}
@@ -94,6 +93,8 @@ export function HomePage() {
             />
           </div>
         </div>
+
+        <SiteChromeExtras />
       </div>
     </div>
   );

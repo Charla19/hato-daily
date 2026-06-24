@@ -42,6 +42,22 @@ export function getPreviousDayKey(now = new Date()): string {
 }
 
 export function getNextResetLabel(now = new Date()): string {
+  const { hours, minutes, seconds } = getResetCountdown(now);
+  return `${hours}h ${pad2(minutes)}m ${pad2(seconds)}s`;
+}
+
+function pad2(value: number): string {
+  return String(value).padStart(2, "0");
+}
+
+export type ResetCountdownParts = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+  totalMs: number;
+};
+
+export function getResetCountdown(now = new Date()): ResetCountdownParts {
   const resetHour = getResetHourUtc();
   const nextReset = new Date(now);
   nextReset.setUTCHours(resetHour, 0, 0, 0);
@@ -50,9 +66,10 @@ export function getNextResetLabel(now = new Date()): string {
     nextReset.setUTCDate(nextReset.getUTCDate() + 1);
   }
 
-  const diffMs = nextReset.getTime() - now.getTime();
-  const hours = Math.floor(diffMs / (1000 * 60 * 60));
-  const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+  const totalMs = Math.max(0, nextReset.getTime() - now.getTime());
+  const hours = Math.floor(totalMs / (1000 * 60 * 60));
+  const minutes = Math.floor((totalMs % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((totalMs % (1000 * 60)) / 1000);
 
-  return `${hours}h ${minutes}m`;
+  return { hours, minutes, seconds, totalMs };
 }

@@ -2,11 +2,11 @@
 
 import { useRef, useState } from "react";
 import { MAX_GIF_FILE_BYTES, MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
+import { ResetCountdown, ResetCountdownPanel } from "@/components/ResetCountdown";
 
 type GifUploadFormProps = {
   hasPseudo: boolean;
   uploadsRemaining: number;
-  resetLabel: string;
   isLive: boolean;
   onUpload: (imageDataUrl: string) => Promise<void>;
 };
@@ -14,7 +14,6 @@ type GifUploadFormProps = {
 export function GifUploadForm({
   hasPseudo,
   uploadsRemaining,
-  resetLabel,
   isLive,
   onUpload,
 }: GifUploadFormProps) {
@@ -86,10 +85,13 @@ export function GifUploadForm({
         <p className="mt-1 text-xs text-[var(--ink-soft)] sm:text-sm">
           Heartopia moments only · 1 GIF at a time · {MAX_GIFS_PER_USER_PER_DAY} per player per day
         </p>
-        <p className="mt-1 text-[11px] text-[var(--ink-soft)]">
-          {uploadsRemaining}/{MAX_GIFS_PER_USER_PER_DAY} uploads left today · resets in {resetLabel}
-        </p>
       </div>
+
+      <ResetCountdownPanel tone="sky" className="mb-3" />
+
+      <p className="mb-3 text-center text-xs font-semibold text-[var(--ink-soft)]">
+        {uploadsRemaining}/{MAX_GIFS_PER_USER_PER_DAY} uploads left today
+      </p>
 
       {!hasPseudo && (
         <p className="mb-3 rounded-xl bg-white/60 px-3 py-2 text-center text-xs font-semibold text-[#7a6b52]">
@@ -99,7 +101,7 @@ export function GifUploadForm({
 
       {uploadsRemaining <= 0 && hasPseudo && isLive && (
         <p className="mb-3 rounded-xl bg-white/60 px-3 py-2 text-center text-xs font-semibold text-[#7a6b52]">
-          Daily limit reached. Come back after reset ({resetLabel}).
+          Daily limit reached. Come back after reset (<ResetCountdown />).
         </p>
       )}
 
