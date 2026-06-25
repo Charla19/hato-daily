@@ -1,15 +1,52 @@
-const DEFAULT_RESET_HOUR_UTC = 6;
+/**
+ * Heartopia Global server resets at 6:00 AM America/New_York.
+ * That is 5:00 UTC during EST (winter) and 10:00 UTC during EDT (summer).
+ *
+ * Default: 5 UTC — matches 8:00 AM in Madagascar (EAT, UTC+3) during US standard time,
+ * which is when many Global players see the daily flip. Override with SERVER_RESET_HOUR_UTC.
+ */
+const DEFAULT_RESET_HOUR_UTC = 5;
 
-export function getResetHourUtc(): number {
-  const parsed = Number(process.env.SERVER_RESET_HOUR_UTC ?? DEFAULT_RESET_HOUR_UTC);
-  return Number.isFinite(parsed) ? parsed : DEFAULT_RESET_HOUR_UTC;
+function getResetHourUtc(): number {
+  const raw = process.env.SERVER_RESET_HOUR_UTC;
+  if (raw) {
+    const parsed = Number(raw);
+    if (Number.isFinite(parsed) && parsed >= 0 && parsed < 24) {
+      return Math.floor(parsed);
+    }
+  }
+  return DEFAULT_RESET_HOUR_UTC;
 }
 
-/** Current Heartopia "game day" as YYYY-MM-DD (resets at SERVER_RESET_HOUR_UTC). */
+function pad2(value: number): string {
+  return String(value).padStart(2, "0");
+}
+
+function getUtcDateParts(now: Date): { year: number; month: number; day: number; hour: number } {
+  return {
+    year: now.getUTCFullYear(),
+    month: now.getUTCMonth() + 1,
+    day: now.getUTCDate(),
+    hour: now.getUTCHours(),
+  };
+}
+
+function formatDayKey(year: number, month: number, day: number): string {
+  return `${year}-${pad2(month)}-${pad2(day)}`;
+}
+
+/** Current Heartopia game day (YYYY-MM-DD, UTC calendar after reset hour). */
 export function getCurrentDayKey(now = new Date()): string {
-  const adjusted = new Date(now);
-  adjusted.setUTCHours(adjusted.getUTCHours() - getResetHourUtc());
-  return adjusted.toISOString().slice(0, 10);
+  const resetHour = getResetHourUtc();
+  const { year, month, day, hour } = getUtcDateParts(now);
+
+  if (hour < resetHour) {
+    const previous = new Date(Date.UTC(year, month - 1, day));
+    previous.setUTCDate(previous.getUTCDate() - 1);
+    return formatDayKey(previous.getUTCFullYear(), previous.getUTCMonth() + 1, previous.getUTCDate());
+  }
+
+  return formatDayKey(year, month, day);
 }
 
 export function formatGameDateLabel(now = new Date()): {
@@ -35,19 +72,28 @@ export function formatGameDateLabel(now = new Date()): {
 }
 
 export function getPreviousDayKey(now = new Date()): string {
-  const adjusted = new Date(now);
-  adjusted.setUTCHours(adjusted.getUTCHours() - getResetHourUtc());
-  adjusted.setUTCDate(adjusted.getUTCDate() - 1);
-  return adjusted.toISOString().slice(0, 10);
+  const dayKey = getCurrentDayKey(now);
+  const [year, month, day] = dayKey.split("-").map(Number);
+  const utc = new Date(Date.UTC(year, month - 1, day));
+  utc.setUTCDate(utc.getUTCDate() - 1);
+  return formatDayKey(utc.getUTCFullYear(), utc.getUTCMonth() + 1, utc.getUTCDate());
+}
+
+export function getNextResetUtc(now = new Date()): Date {
+  const resetHour = getResetHourUtc();
+  const { year, month, day, hour } = getUtcDateParts(now);
+
+  const next = new Date(Date.UTC(year, month - 1, day, resetHour, 0, 0, 0));
+  if (hour >= resetHour) {
+    next.setUTCDate(next.getUTCDate() + 1);
+  }
+
+  return next;
 }
 
 export function getNextResetLabel(now = new Date()): string {
   const { hours, minutes, seconds } = getResetCountdown(now);
   return `${hours}h ${pad2(minutes)}m ${pad2(seconds)}s`;
-}
-
-function pad2(value: number): string {
-  return String(value).padStart(2, "0");
 }
 
 export type ResetCountdownParts = {
@@ -58,14 +104,7 @@ export type ResetCountdownParts = {
 };
 
 export function getResetCountdown(now = new Date()): ResetCountdownParts {
-  const resetHour = getResetHourUtc();
-  const nextReset = new Date(now);
-  nextReset.setUTCHours(resetHour, 0, 0, 0);
-
-  if (now >= nextReset) {
-    nextReset.setUTCDate(nextReset.getUTCDate() + 1);
-  }
-
+  const nextReset = getNextResetUtc(now);
   const totalMs = Math.max(0, nextReset.getTime() - now.getTime());
   const hours = Math.floor(totalMs / (1000 * 60 * 60));
   const minutes = Math.floor((totalMs % (1000 * 60 * 60)) / (1000 * 60));

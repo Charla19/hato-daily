@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { MAX_GIFS_PER_USER_PER_DAY, MAX_OUTFIT_SLOTS, VALIDATION_THRESHOLD } from "@/lib/constants";
+import { MAX_GIFS_PER_USER_PER_DAY, MAX_GALLERY_CAPTION_LENGTH, MAX_OUTFIT_SLOTS, VALIDATION_THRESHOLD } from "@/lib/constants";
 
 type AppInfoModalProps = {
   open: boolean;
@@ -27,8 +27,10 @@ const INFO_SECTIONS: InfoSection[] = [
     emoji: "⏳",
     title: "Daily reset",
     items: [
-      "New day at 6:00 AM UTC (same as in-game dailies).",
-      "Intel, runway slots, gallery uploads, and votes clear when the timer hits zero.",
+      "All timers and daily flips use Heartopia Global Server time (6:00 AM Eastern).",
+      "America, Asia, and SEA servers reset at different hours. If you play on another server, your in-game day may not match ours.",
+      "Intel and runway refresh when the timer hits zero. Gallery posts stay up.",
+      "Upload limits reset daily too.",
     ],
   },
   {
@@ -64,7 +66,8 @@ const INFO_SECTIONS: InfoSection[] = [
     title: "Gallery",
     items: [
       "Use the Gallery button in the header.",
-      `Post Heartopia GIFs or screenshots. ${MAX_GIFS_PER_USER_PER_DAY} per player per day.`,
+      `Post Heartopia GIFs or screenshots with an optional caption (${MAX_GALLERY_CAPTION_LENGTH} chars max).`,
+      `Posts stay in the gallery until removed from the database. ${MAX_GIFS_PER_USER_PER_DAY} uploads per player per day.`,
       "React with the emotion panel: 😂 ❤️ 😍 🐛 💫 🧠. Tap a post for fullscreen scroll.",
     ],
   },

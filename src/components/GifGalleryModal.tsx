@@ -110,6 +110,11 @@ export function GifGalleryModal({
 
             <div className="gallery-slide-meta">
               <p className="text-lg font-bold">{gif.author}</p>
+              {gif.caption ? (
+                <p className="gallery-slide-caption" title={gif.caption}>
+                  {gif.caption}
+                </p>
+              ) : null}
               <GalleryReactionPanel
                 gif={gif}
                 onReact={(reaction) => handleReact(gif.id, reaction)}

@@ -783,6 +783,19 @@ body {
   image-rendering: auto;
 }
 
+.gif-card-caption {
+  margin-top: 0.15rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: 0.65rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
 .gallery-slide {
   box-sizing: border-box;
   display: flex;
@@ -834,6 +847,19 @@ body {
   flex-shrink: 0;
   text-align: center;
   color: #fff;
+  max-width: min(100%, 28rem);
+  padding-inline: 0.5rem;
+}
+
+.gallery-slide-caption {
+  margin-top: 0.35rem;
+  margin-bottom: 0.15rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 640px) {

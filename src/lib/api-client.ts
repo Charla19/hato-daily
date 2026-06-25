@@ -161,11 +161,12 @@ export async function submitGif(
   voterId: string,
   imageDataUrl: string,
   pseudo: string,
+  caption?: string,
 ): Promise<{ gif: GifEntry; pseudo: string }> {
   const response = await fetch("/api/gallery", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ voterId, imageDataUrl, pseudo }),
+    body: JSON.stringify({ voterId, imageDataUrl, pseudo, caption }),
   });
 
   if (!response.ok) {

@@ -53,6 +53,11 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
                 />
               </div>
               <p className="truncate px-0.5 text-xs font-bold text-[#3d4a5c]">{gif.author}</p>
+              {gif.caption ? (
+                <p className="gif-card-caption px-0.5" title={gif.caption}>
+                  {gif.caption}
+                </p>
+              ) : null}
               <GalleryReactionSummary
                 gif={gif}
                 className="px-0.5 text-[10px] text-[var(--ink-soft)]"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
+import { MAX_GALLERY_CAPTION_LENGTH, MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
 import { GALLERY_IMAGE_ACCEPT, validateGalleryFile } from "@/lib/gallery-upload";
 import { ResetCountdown, ResetCountdownPanel } from "@/components/ResetCountdown";
 
@@ -9,7 +9,7 @@ type GifUploadFormProps = {
   hasPseudo: boolean;
   uploadsRemaining: number;
   isLive: boolean;
-  onUpload: (imageDataUrl: string) => Promise<void>;
+  onUpload: (imageDataUrl: string, caption?: string) => Promise<void>;
 };
 
 export function GifUploadForm({
@@ -20,6 +20,7 @@ export function GifUploadForm({
 }: GifUploadFormProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [caption, setCaption] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -60,8 +61,9 @@ export function GifUploadForm({
     setSuccess(false);
 
     try {
-      await onUpload(preview);
+      await onUpload(preview, caption);
       setPreview(null);
+      setCaption("");
       if (inputRef.current) inputRef.current.value = "";
       setSuccess(true);
     } catch (err) {
@@ -78,11 +80,16 @@ export function GifUploadForm({
           🎬 Heartopia Gallery
         </h2>
         <p className="mt-1 text-xs text-[var(--ink-soft)] sm:text-sm">
-          GIFs or screenshots · Heartopia only · {MAX_GIFS_PER_USER_PER_DAY} per player per day
+          GIFs or screenshots · Heartopia only · {MAX_GIFS_PER_USER_PER_DAY} per player per day ·
+          posts stay until you remove them
         </p>
       </div>
 
-      <ResetCountdownPanel tone="sky" className="mb-3" />
+      <ResetCountdownPanel
+        tone="sky"
+        className="mb-3"
+        hint="Upload quota resets when this hits zero. Gallery posts stay up."
+      />
 
       <p className="mb-3 text-center text-xs font-semibold text-[var(--ink-soft)]">
         {uploadsRemaining}/{MAX_GIFS_PER_USER_PER_DAY} uploads left today
@@ -125,6 +132,28 @@ export function GifUploadForm({
         >
           {uploading ? "Uploading…" : "Post to gallery"}
         </button>
+      </div>
+
+      <div className="mt-3">
+        <label
+          htmlFor="gallery-caption"
+          className="mb-1 flex items-center justify-between gap-2 text-xs font-bold text-[var(--plum-dark)]"
+        >
+          <span>Caption (optional)</span>
+          <span className="font-semibold text-[var(--ink-soft)]">
+            {caption.length}/{MAX_GALLERY_CAPTION_LENGTH}
+          </span>
+        </label>
+        <input
+          id="gallery-caption"
+          type="text"
+          value={caption}
+          maxLength={MAX_GALLERY_CAPTION_LENGTH}
+          disabled={!canUpload}
+          placeholder="One line, like in-game chat"
+          onChange={(event) => setCaption(event.target.value)}
+          className="form-input w-full px-3 py-2 text-sm disabled:opacity-60"
+        />
       </div>
 
       {preview && (

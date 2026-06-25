@@ -1,17 +1,18 @@
 import { MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
 import { getCurrentDayKey } from "@/lib/day-key";
 import { getVisitorPseudo } from "@/lib/db/visitor";
-import { parseGalleryDataUrl } from "@/lib/gallery-upload";
+import { normalizeGalleryCaption, parseGalleryDataUrl } from "@/lib/gallery-upload";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import type { GifEntry, GifReactionType } from "@/lib/types";
 
 const GIF_SELECT =
-  "id, author, image_url, haha_votes, heart_votes, cute_votes, bug_votes, romance_votes, brain_votes";
+  "id, author, image_url, caption, haha_votes, heart_votes, cute_votes, bug_votes, romance_votes, brain_votes";
 
 type GifRow = {
   id: string;
   author: string;
   image_url: string;
+  caption?: string | null;
   haha_votes: number;
   heart_votes: number;
   cute_votes?: number;
@@ -34,6 +35,7 @@ function mapGifRow(row: GifRow, userReaction?: GifReactionType): GifEntry {
     id: row.id,
     author: row.author,
     imageUrl: row.image_url,
+    caption: row.caption ?? null,
     reactionVotes: {
       haha: row.haha_votes,
       heart: row.heart_votes,
@@ -51,11 +53,7 @@ export async function fetchGallery(voterKey: string, ipHash?: string): Promise<G
   const dayKey = getCurrentDayKey();
 
   const [gifsResult, uploadCountResult] = await Promise.all([
-    supabase
-      .from("gif_submissions")
-      .select(GIF_SELECT)
-      .eq("day_key", dayKey)
-      .order("created_at", { ascending: false }),
+    supabase.from("gif_submissions").select(GIF_SELECT).order("created_at", { ascending: false }),
     voterKey
       ? supabase
           .from("gif_submissions")
@@ -102,7 +100,7 @@ export async function fetchGallery(voterKey: string, ipHash?: string): Promise<G
   };
 }
 
-export async function uploadGifImage(dayKey: string, dataUrl: string) {
+export async function uploadGifImage(dataUrl: string) {
   const supabase = getSupabaseAdmin();
   const parsed = parseGalleryDataUrl(dataUrl);
 
@@ -110,7 +108,7 @@ export async function uploadGifImage(dayKey: string, dataUrl: string) {
     throw new Error("Use a GIF, PNG, JPG, or WebP from Heartopia.");
   }
 
-  const path = `${dayKey}/${crypto.randomUUID()}.${parsed.extension}`;
+  const path = `gallery/${crypto.randomUUID()}.${parsed.extension}`;
 
   const { error: uploadError } = await supabase.storage
     .from("gif-gallery")
@@ -126,9 +124,11 @@ export async function insertGifSubmission(input: {
   voterKey: string;
   author: string;
   imageDataUrl: string;
+  caption?: string | null;
 }) {
   const supabase = getSupabaseAdmin();
   const dayKey = getCurrentDayKey();
+  const caption = normalizeGalleryCaption(input.caption);
 
   const { count, error: countError } = await supabase
     .from("gif_submissions")
@@ -141,7 +141,7 @@ export async function insertGifSubmission(input: {
     throw new Error(`You can only upload ${MAX_GIFS_PER_USER_PER_DAY} posts per day.`);
   }
 
-  const { publicUrl, path } = await uploadGifImage(dayKey, input.imageDataUrl);
+  const { publicUrl, path } = await uploadGifImage(input.imageDataUrl);
 
   const { data, error } = await supabase
     .from("gif_submissions")
@@ -151,6 +151,7 @@ export async function insertGifSubmission(input: {
       image_url: publicUrl,
       image_path: path,
       submitter_key: input.voterKey,
+      caption,
     })
     .select(GIF_SELECT)
     .single();

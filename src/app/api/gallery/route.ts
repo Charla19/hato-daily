@@ -32,6 +32,7 @@ type GifBody = {
   voterId: string;
   imageDataUrl: string;
   pseudo?: string;
+  caption?: string;
 };
 
 export async function POST(request: Request) {
@@ -59,6 +60,7 @@ export async function POST(request: Request) {
       voterKey: body.voterId,
       author: `@${pseudoSource}`,
       imageDataUrl: body.imageDataUrl,
+      caption: body.caption,
     });
 
     const ipHash = hashIp(getClientIp(request));

@@ -25,9 +25,14 @@ type ResetCountdownTone = "pink" | "sky";
 type ResetCountdownPanelProps = {
   tone?: ResetCountdownTone;
   className?: string;
+  hint?: string;
 };
 
-export function ResetCountdownPanel({ tone = "pink", className = "" }: ResetCountdownPanelProps) {
+export function ResetCountdownPanel({
+  tone = "pink",
+  className = "",
+  hint = "Intel and runway refresh when this hits zero",
+}: ResetCountdownPanelProps) {
   const { hours, minutes, seconds } = useResetCountdown();
 
   return (
@@ -45,7 +50,7 @@ export function ResetCountdownPanel({ tone = "pink", className = "" }: ResetCoun
         <span className="reset-countdown-sep">:</span>
         <span className="reset-countdown-part reset-countdown-seconds">{pad2(seconds)}s</span>
       </p>
-      <p className="reset-countdown-hint">Intel, runway and gallery refresh when this hits zero</p>
+      <p className="reset-countdown-hint">{hint}</p>
     </div>
   );
 }

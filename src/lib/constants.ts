@@ -6,6 +6,8 @@ export const INTEL_MODAL_MAX_HEIGHT = "90vh";
 export const RUNWAY_PREVIEW_MAX_HEIGHT = "44vh";
 export const GALLERY_GRID_MAX_HEIGHT = "52vh";
 export const MAX_GIFS_PER_USER_PER_DAY = 5;
+/** Heartopia in-game chat line length (approx.). */
+export const MAX_GALLERY_CAPTION_LENGTH = 80;
 export const MAX_GALLERY_FILE_BYTES = 8 * 1024 * 1024;
 /** @deprecated Use MAX_GALLERY_FILE_BYTES */
 export const MAX_GIF_FILE_BYTES = MAX_GALLERY_FILE_BYTES;

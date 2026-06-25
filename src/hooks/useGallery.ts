@@ -75,7 +75,7 @@ export function useGallery() {
   );
 
   const uploadGif = useCallback(
-    async (imageDataUrl: string) => {
+    async (imageDataUrl: string, caption?: string) => {
       const rawPseudo = pseudo ? normalizePseudoInput(pseudo) : "";
       if (!rawPseudo) {
         throw new Error("Set your pseudo before uploading.");
@@ -85,7 +85,12 @@ export function useGallery() {
         throw new Error("Gallery uploads require Supabase.");
       }
 
-      const { gif, pseudo: savedPseudo } = await submitGif(voterId, imageDataUrl, rawPseudo);
+      const { gif, pseudo: savedPseudo } = await submitGif(
+        voterId,
+        imageDataUrl,
+        rawPseudo,
+        caption,
+      );
       setPseudo(savedPseudo);
       setGifs((current) => [gif, ...current]);
       setUploadsRemaining((value) => Math.max(0, value - 1));

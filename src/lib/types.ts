@@ -44,6 +44,7 @@ export type GifEntry = {
   id: string;
   author: string;
   imageUrl: string;
+  caption?: string | null;
   reactionVotes: Record<GifReactionType, number>;
   userReaction?: GifReactionType;
 };

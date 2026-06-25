@@ -1,4 +1,4 @@
-import { MAX_GALLERY_FILE_BYTES } from "@/lib/constants";
+import { MAX_GALLERY_CAPTION_LENGTH, MAX_GALLERY_FILE_BYTES } from "@/lib/constants";
 
 export const GALLERY_IMAGE_ACCEPT = "image/gif,image/jpeg,image/png,image/webp";
 
@@ -33,6 +33,15 @@ export function validateGalleryFile(file: File): string | null {
   }
 
   return null;
+}
+
+export function normalizeGalleryCaption(raw: string | undefined | null): string | null {
+  if (!raw) return null;
+
+  const collapsed = raw.replace(/\s+/g, " ").trim();
+  if (!collapsed) return null;
+
+  return collapsed.slice(0, MAX_GALLERY_CAPTION_LENGTH);
 }
 
 export function parseGalleryDataUrl(dataUrl: string): {
