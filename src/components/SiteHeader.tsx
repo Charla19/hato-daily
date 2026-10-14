@@ -14,7 +14,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({
   backHref,
-  backLabel = "← Back home",
+  backLabel = "Back home",
   subtitle = "Your cozy corner for Heartopia dailies",
   showGalleryLink = false,
   className = "",
@@ -23,7 +23,7 @@ export function SiteHeader({
   const titleBlock = (
     <>
       <h1 className="font-[family-name:var(--font-fredoka)] text-lg font-bold leading-tight text-[#3d4a5c] sm:text-2xl">
-        🌸 Hato Daily 🌸
+        Hato Daily
       </h1>
       <p className="mt-0.5 text-[11px] leading-snug text-[#5c6b7a] sm:mt-1 sm:text-sm">{subtitle}</p>
     </>

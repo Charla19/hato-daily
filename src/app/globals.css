@@ -48,13 +48,7 @@ body {
 .whimsy-bg-sky {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(168, 223, 248, 0.78) 0%,
-    rgba(255, 214, 232, 0.5) 40%,
-    rgba(200, 245, 220, 0.28) 70%,
-    rgba(200, 245, 220, 0.06) 100%
-  );
+  background: rgba(168, 223, 248, 0.8);
 }
 
 .whimsy-bg-cloud {
@@ -132,11 +126,7 @@ body {
 }
 
 .forest-edge-fade {
-  background: linear-gradient(
-    to top,
-    rgba(168, 223, 248, 0.15) 0%,
-    transparent 100%
-  );
+  background: transparent;
 }
 
 .forest-tree-sway {
@@ -378,15 +368,18 @@ body {
 }
 
 .panel-scroll-fade[data-tone="sky"]::after {
-  background: linear-gradient(to bottom, rgba(223, 245, 255, 0), #dff5ff 88%);
+  background: #dff5ff;
+  opacity: 0.92;
 }
 
 .panel-scroll-fade[data-tone="pink"]::after {
-  background: linear-gradient(to bottom, rgba(255, 214, 232, 0), #ffd6e8 88%);
+  background: #ffd6e8;
+  opacity: 0.92;
 }
 
 .panel-scroll-fade[data-tone="lemon"]::after {
-  background: linear-gradient(to bottom, rgba(255, 246, 184, 0), #fff6b8 88%);
+  background: #fff6b8;
+  opacity: 0.92;
 }
 
 .btn-see-all:active {
@@ -454,7 +447,7 @@ body {
   background-color: #a8b8c8;
 }
 
-/* ── Buttons (solid, no gradients) ── */
+/* ── Solid buttons ── */
 
 .btn-react {
   background-color: #ffffff;
@@ -1046,7 +1039,8 @@ body {
 .gallery-scroll-hint-fixed {
   bottom: 1.35rem;
   padding: 0.5rem 1rem 0.25rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 100%);
+  background: rgba(61, 74, 92, 0.76);
+  border-radius: 999px;
 }
 
 @media (min-width: 640px) {
@@ -1270,7 +1264,7 @@ body {
   justify-content: center;
   border: 3px solid #ffe066;
   border-radius: 999px;
-  background: linear-gradient(145deg, #fff6b8 0%, #ffe066 100%);
+  background: #ffe066;
   box-shadow:
     0 4px 0 #e8c840,
     0 8px 18px rgba(61, 74, 92, 0.18);
@@ -1312,7 +1306,7 @@ body {
   justify-content: center;
   border: 3px solid #ffe066;
   border-radius: 999px;
-  background: linear-gradient(145deg, #fff6b8 0%, #ffe066 100%);
+  background: #ffe066;
   box-shadow:
     0 5px 0 #e8c840,
     0 10px 22px rgba(61, 74, 92, 0.2);
@@ -1488,4 +1482,155 @@ body {
   .fashion-card:hover {
     transform: none;
   }
+}
+
+/* ── Hato Daily visual refresh ──
+   Tactile, calm and game-like: solid surfaces, small elevation and soft corners. */
+
+:root {
+  --surface: #fffdf8;
+  --surface-muted: #f5fbff;
+  --line: rgba(61, 74, 92, 0.16);
+  --shadow-sm: 0 3px 0 rgba(61, 74, 92, 0.12), 0 10px 24px rgba(61, 74, 92, 0.09);
+  --shadow-hover: 0 5px 0 rgba(61, 74, 92, 0.14), 0 16px 30px rgba(61, 74, 92, 0.13);
+}
+
+body {
+  background: #a8dff8;
+  letter-spacing: 0.005em;
+}
+
+.whimsy-bg-image { opacity: 0.22; }
+.whimsy-bg-cloud { opacity: 0.72; filter: none; }
+.site-title-card,
+.winner-banner,
+.pseudo-bar,
+.gallery-page-card,
+.panel-card {
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-card,
+.gallery-page-card {
+  border-radius: 24px;
+  border-width: 2px;
+}
+
+.panel-card {
+  padding: 1.1rem;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+@media (hover: hover) {
+  .panel-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+.panel-title {
+  border-bottom-width: 2px;
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+}
+
+.site-title-card,
+.winner-banner {
+  border-width: 2px;
+  border-radius: 24px;
+  box-shadow: 0 4px 0 #e8c840, 0 14px 28px rgba(61, 74, 92, 0.11);
+}
+
+.site-title-card h1,
+.site-title {
+  letter-spacing: 0.025em;
+}
+
+.pseudo-bar {
+  border-width: 2px;
+  border-radius: 18px;
+}
+
+.info-item,
+.fashion-card,
+.gif-card,
+.runway-quiz-cta,
+.reset-countdown-panel,
+.app-info-section {
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 0 rgba(61, 74, 92, 0.08);
+}
+
+.info-item {
+  border-left-width: 4px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.fashion-card,
+.gif-card {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.form-input {
+  min-height: 44px;
+  border-color: rgba(61, 74, 92, 0.2);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(61, 74, 92, 0.04);
+}
+
+.form-input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(124, 95, 199, 0.55);
+  outline-offset: 3px;
+}
+
+.btn-submit,
+.btn-vote,
+.btn-see-all,
+.gallery-vote-btn,
+.gallery-react-btn,
+.gallery-reaction-btn {
+  min-height: 44px;
+  border-radius: 12px;
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+@media (hover: hover) {
+  .btn-submit:hover,
+  .btn-vote:hover,
+  .btn-see-all:hover,
+  .gallery-vote-btn:hover,
+  .gallery-react-btn:hover,
+  .gallery-reaction-btn:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.btn-submit:active,
+.btn-vote:active,
+.btn-see-all:active,
+.gallery-vote-btn:active,
+.gallery-react-btn:active,
+.gallery-reaction-btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.sound-toggle-btn,
+.app-info-fab {
+  background: #ffe066;
+  border-width: 2px;
+  box-shadow: 0 3px 0 #e8c840, 0 8px 18px rgba(61, 74, 92, 0.16);
+}
+
+.gallery-frame {
+  background: rgba(61, 74, 92, 0.14);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+@media (max-width: 639px) {
+  .panel-card { padding: 1rem; }
+  .site-title-card { border-radius: 20px; }
 }

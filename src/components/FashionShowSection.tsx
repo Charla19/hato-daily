@@ -47,19 +47,19 @@ export function FashionShowSection({
 
   return (
     <>
-      <PanelCard tone="pink" title="Today's Runway" icon="👗" insect="butterfly-orange">
+      <PanelCard tone="pink" title="Today's Runway" insect="butterfly-orange">
         <ResetCountdownPanel tone="pink" className="mb-3" />
 
         {hasSubmittedToday ? (
           <div className="status-ok mb-3 rounded-xl px-3 py-3 text-center">
-            <p className="text-sm font-bold">✅ You&apos;re on today&apos;s runway!</p>
+            <p className="text-sm font-bold">You&apos;re on today&apos;s runway!</p>
             <p className="mt-1 text-xs text-[var(--ink-soft)]">
               Good luck with the votes. Come back tomorrow for another shot at Style Icon.
             </p>
           </div>
         ) : slotsFull ? (
           <div className="status-full mb-3 rounded-xl px-3 py-3 text-center">
-            <p className="text-sm font-bold">🚪 Dressing room full</p>
+            <p className="text-sm font-bold">Dressing room full</p>
             <p className="mt-1 text-xs text-[var(--ink-soft)]">
               All {MAX_OUTFIT_SLOTS} slots claimed. Reset in <ResetCountdown />.
             </p>
@@ -97,7 +97,7 @@ export function FashionShowSection({
                       </button>
                     ) : (
                       <div className="mb-1.5 flex h-[100px] items-center justify-center rounded-lg bg-[#e2e8f0] text-xs text-[var(--ink-soft)]">
-                        ✨ Outfit
+                        Outfit
                       </div>
                     )}
                     <div className="mb-1 text-xs text-[var(--ink)]">
@@ -112,7 +112,7 @@ export function FashionShowSection({
                       }`}
                       aria-pressed={outfit.hasLiked}
                     >
-                      {outfit.hasLiked ? `❤️ Liked · ${outfit.votes}` : `❤️ ${outfit.votes}`}
+                      {outfit.hasLiked ? `Liked · ${outfit.votes}` : `Like · ${outfit.votes}`}
                     </button>
                   </div>
                 ))}
