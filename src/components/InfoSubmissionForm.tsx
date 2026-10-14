@@ -128,7 +128,7 @@ export function InfoSubmissionForm({
   }
 
   return (
-    <PanelCard tone="lavender" title="Share Intel">
+    <PanelCard id="share-intel" tone="lavender" title="Share a discovery">
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2.5">
           <label htmlFor="info-type" className="mb-1 block text-xs font-bold text-[var(--ink)]">

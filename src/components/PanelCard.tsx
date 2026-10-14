@@ -5,6 +5,7 @@ type PanelTone = "sky" | "mint" | "pink" | "lavender" | "lemon" | "peach";
 type PanelCardProps = {
   tone: PanelTone;
   title: string;
+  id?: string;
   className?: string;
   children: ReactNode;
 };
@@ -12,11 +13,13 @@ type PanelCardProps = {
 export function PanelCard({
   tone,
   title,
+  id,
   className = "",
   children,
 }: PanelCardProps) {
   return (
     <section
+      id={id}
       className={`panel-card panel-card-${tone} relative mb-5 overflow-visible p-4 ${className}`}
       data-tone={tone}
     >

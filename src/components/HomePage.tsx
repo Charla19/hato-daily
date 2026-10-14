@@ -45,12 +45,11 @@ export function HomePage() {
   }
 
   return (
-    <div className="app-root relative isolate min-h-screen">
+    <div className="app-root home-page-root relative isolate min-h-screen">
       <WhimsyBackground />
       <ForestEdge />
-      <AnnieNpc />
 
-      <div className="app-shell relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-7">
+      <div className="app-shell home-app-shell relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-7">
         {error && (
           <div
             className={`mb-4 rounded-2xl border-2 px-3 py-3 text-sm sm:px-4 ${
@@ -67,19 +66,22 @@ export function HomePage() {
           <SiteHeader showGalleryLink />
         )}
 
-        {!winner && (
-          <div className="page-intro">
-            <div>
-              <p className="page-eyebrow">Your Heartopia, today</p>
-              <h2 className="page-title">The village board</h2>
+        <section className="home-welcome" aria-labelledby="home-welcome-title">
+          <div className="home-welcome-copy">
+            <p className="home-welcome-kicker">Your Heartopia, today</p>
+            <h2 id="home-welcome-title">The village is waiting.</h2>
+            <p>Catch up on today&apos;s finds, share something you spotted, and cheer on a villager&apos;s look.</p>
+            <div className="home-welcome-actions">
+              <a href="#share-intel" className="welcome-action welcome-action-primary">Share a discovery <span aria-hidden="true">→</span></a>
+              <a href="#runway" className="welcome-action welcome-action-secondary">Visit the runway</a>
             </div>
-            <p className="page-description">
-              Find the latest discoveries, share a helpful sighting, and see who&apos;s dressing up today.
-            </p>
           </div>
-        )}
-
-        <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
+          <div className="home-welcome-player">
+            <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} className="home-pseudo-bar" />
+          </div>
+          <AnnieNpc placement="welcome" />
+          <span className="home-welcome-location" aria-hidden="true">HEARTOPIA · VILLAGE LIFE</span>
+        </section>
 
         <div className="home-dashboard">
           <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />

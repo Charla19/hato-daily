@@ -66,8 +66,10 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
           onClick={() => handleVote("true")}
           className={`${trueButtonClass()} mr-1.5 inline-block rounded-md border px-2.5 py-1 font-bold`}
           aria-pressed={votedTrue}
+          aria-label={`Mark as true, ${info.trueVotes} votes`}
         >
-          ✅ {info.trueVotes}
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4.5 10.2 3.5 3.5 7.5-7.5" /></svg>
+          <span>True</span><span className="vote-count">{info.trueVotes}</span>
         </button>
         <button
           type="button"
@@ -75,8 +77,10 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
           onClick={() => handleVote("false")}
           className={`${falseButtonClass()} inline-block rounded-md border px-2.5 py-1 font-bold`}
           aria-pressed={votedFalse}
+          aria-label={`Mark as false, ${info.falseVotes} votes`}
         >
-          ❌ {info.falseVotes}
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8m0-8-8 8" /></svg>
+          <span>False</span><span className="vote-count">{info.falseVotes}</span>
         </button>
       </div>
     </div>

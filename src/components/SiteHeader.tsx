@@ -24,7 +24,7 @@ export function SiteHeader({
     <header className={`site-header mb-5 sm:mb-7 ${className}`}>
       <div className="site-header-row">
         <Link href="/" className="site-brand" aria-label="Hato Daily home">
-          <span className="site-brand-mark" aria-hidden="true">H</span>
+          <img className="site-brand-mark" src="/favicon.ico" alt="" aria-hidden="true" />
           <span className="site-brand-copy">
             <h1 className="site-brand-name">Hato Daily</h1>
             <span className="site-brand-subtitle">Heartopia community journal</span>

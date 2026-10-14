@@ -7,9 +7,10 @@ type PseudoBarProps = {
   pseudo: string | null;
   onSave: (pseudo: string) => Promise<void>;
   isLive: boolean;
+  className?: string;
 };
 
-export function PseudoBar({ pseudo, onSave, isLive }: PseudoBarProps) {
+export function PseudoBar({ pseudo, onSave, isLive, className = "" }: PseudoBarProps) {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState("");
   const [saving, setSaving] = useState(false);
@@ -44,7 +45,7 @@ export function PseudoBar({ pseudo, onSave, isLive }: PseudoBarProps) {
   if (!isLive) return null;
 
   return (
-    <div className="pseudo-bar relative z-10 mb-4 rounded-2xl border-[3px] border-[#9ee8be] bg-[#c8f5dc] px-3 py-3 shadow-[0_4px_0_rgba(61,74,92,0.06)] sm:px-4">
+    <div className={`pseudo-bar relative z-10 mb-4 rounded-2xl border-[3px] border-[#9ee8be] bg-[#c8f5dc] px-3 py-3 shadow-[0_4px_0_rgba(61,74,92,0.06)] sm:px-4 ${className}`}>
       {editing ? (
         <form onSubmit={(event) => void handleSave(event)} className="flex flex-col gap-2 sm:flex-row sm:items-end">
           <div className="flex-1">
