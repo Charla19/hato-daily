@@ -42,7 +42,7 @@ export function GalleryPage() {
       <ForestEdge />
       <AnnieNpc />
 
-      <div className="app-shell relative z-10 mx-auto w-full max-w-6xl px-3 py-4 pb-8 sm:px-4 sm:py-7 sm:pb-10">
+      <div className="app-shell gallery-shell relative z-10 mx-auto w-full max-w-7xl px-3 py-3 pb-8 sm:px-5 sm:py-5 sm:pb-10">
         {error && (
           <div
             className={`mb-4 rounded-2xl border-2 px-3 py-3 text-sm sm:px-4 ${
@@ -60,7 +60,7 @@ export function GalleryPage() {
 
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
 
-        <div className="page-intro">
+        <div className="page-intro gallery-intro">
           <div>
             <p className="page-eyebrow">Heartopia community</p>
             <h2 className="page-title">The village album</h2>
@@ -68,17 +68,23 @@ export function GalleryPage() {
           <p className="page-description">GIFs and screenshots from Heartopia, shared by the community.</p>
         </div>
 
-        <section className="gallery-page-card rounded-[20px] border-[3px] border-[#b8e4ff] bg-[#dff5ff] p-4 shadow-[0_5px_0_rgba(61,74,92,0.08),0_8px_20px_rgba(61,74,92,0.07)] sm:p-5">
+        <section className="gallery-workspace">
+          <aside className="gallery-upload-card">
+            <div className="gallery-upload-heading">
+              <span className="gallery-upload-glyph" aria-hidden="true">＋</span>
+              <div><h2>Share a moment</h2><p>From your Heartopia camera roll</p></div>
+            </div>
           <GifUploadForm
             hasPseudo={Boolean(pseudo)}
             uploadsRemaining={uploadsRemaining}
             isLive={isLive}
             onUpload={uploadGif}
           />
-
-          <div className="my-4 border-t-[3px] border-dashed border-[rgba(61,74,92,0.12)]" />
-
-          <GifGrid gifs={gifs} onReact={reactGif} />
+          </aside>
+          <div className="gallery-feed-card">
+            <div className="gallery-feed-heading"><div><p className="page-eyebrow">Community snapshots</p><h2>Village album</h2></div><span>{gifs.length} {gifs.length === 1 ? "memory" : "memories"}</span></div>
+            <GifGrid gifs={gifs} onReact={reactGif} />
+          </div>
         </section>
 
         <SiteChromeExtras />

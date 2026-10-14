@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { MAX_GALLERY_CAPTION_LENGTH, MAX_GIFS_PER_USER_PER_DAY } from "@/lib/constants";
 import { GALLERY_IMAGE_ACCEPT, validateGalleryFile } from "@/lib/gallery-upload";
-import { ResetCountdown, ResetCountdownPanel } from "@/components/ResetCountdown";
+import { ResetCountdown } from "@/components/ResetCountdown";
 
 type GifUploadFormProps = {
   hasPseudo: boolean;
@@ -75,25 +75,8 @@ export function GifUploadForm({
 
   return (
     <form onSubmit={(event) => void handleSubmit(event)} className="gif-upload-form">
-      <div className="mb-3 text-center">
-        <h2 className="font-[family-name:var(--font-fredoka)] text-lg font-bold text-[#3d4a5c] sm:text-xl">
-          🎬 Heartopia Gallery
-        </h2>
-        <p className="mt-1 text-xs text-[var(--ink-soft)] sm:text-sm">
-          GIFs or screenshots · Heartopia only · {MAX_GIFS_PER_USER_PER_DAY} per player per day ·
-          posts stay until you remove them
-        </p>
-      </div>
-
-      <ResetCountdownPanel
-        tone="sky"
-        className="mb-3"
-        hint="Upload quota resets when this hits zero. Gallery posts stay up."
-      />
-
-      <p className="mb-3 text-center text-xs font-semibold text-[var(--ink-soft)]">
-        {uploadsRemaining}/{MAX_GIFS_PER_USER_PER_DAY} uploads left today
-      </p>
+      <div className="gallery-reset-line"><span>Daily uploads reset in</span><ResetCountdown /></div>
+      <p className="gallery-quota">{uploadsRemaining} of {MAX_GIFS_PER_USER_PER_DAY} uploads available today</p>
 
       {!hasPseudo && (
         <p className="mb-3 rounded-xl bg-white/60 px-3 py-2 text-center text-xs font-semibold text-[#7a6b52]">
@@ -107,7 +90,7 @@ export function GifUploadForm({
         </p>
       )}
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+      <div className="gallery-file-field">
         <div className="flex-1">
           <label
             htmlFor="gallery-upload"
@@ -128,7 +111,7 @@ export function GifUploadForm({
         <button
           type="submit"
           disabled={!canUpload || !preview}
-          className="btn-submit w-full rounded-xl px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60 sm:w-auto"
+          className="btn-submit w-full rounded-xl px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
         >
           {uploading ? "Uploading…" : "Post to gallery"}
         </button>

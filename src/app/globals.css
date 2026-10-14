@@ -1484,6 +1484,59 @@ body {
   }
 }
 
+/* Editorial, compact album layout: upload controls and community memories share the first screen. */
+.gallery-shell { max-width: 88rem; }
+.gallery-shell .site-header { margin-bottom: 0.8rem; }
+.gallery-shell .pseudo-bar { margin-bottom: 0.85rem; padding: 0.6rem 0.9rem !important; }
+.gallery-intro { margin-bottom: 0.75rem; }
+.gallery-intro .page-title { font-size: clamp(1.45rem, 2.4vw, 1.9rem); }
+.gallery-intro .page-description { font-size: 0.86rem; }
+.gallery-workspace { display: grid; grid-template-columns: minmax(16rem, 0.29fr) minmax(0, 0.71fr); align-items: start; gap: 1rem; }
+.gallery-upload-card,
+.gallery-feed-card { border: 1px solid rgba(63, 86, 69, 0.16); border-radius: 17px; background: #fffdf7; box-shadow: 0 5px 18px rgba(47, 67, 54, 0.08); }
+.gallery-upload-card { position: sticky; top: 1rem; padding: 1rem; }
+.gallery-feed-card { min-width: 0; padding: 1rem 1.05rem; }
+.gallery-upload-heading { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid rgba(63, 86, 69, 0.12); }
+.gallery-upload-glyph { display: grid; width: 2.4rem; height: 2.4rem; place-items: center; border-radius: 10px; background: #e7efdf; color: #526d53; font-size: 1.5rem; font-weight: 500; }
+.gallery-upload-heading h2,.gallery-feed-heading h2 { margin: 0; color: #3a4d40; font-family: var(--font-display); font-size: 1.12rem; font-weight: 700; line-height: 1.2; }
+.gallery-upload-heading p { margin: 0.12rem 0 0; color: #778273; font-size: 0.75rem; }
+.gallery-reset-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.2rem 0.6rem; margin-bottom: 0.35rem; color: #6d7969; font-size: 0.72rem; }
+.gallery-reset-line .reset-countdown { color: #ae6b79; font-size: 0.78rem; }
+.gallery-quota { margin: 0 0 1rem; color: #526d53; font-size: 0.74rem; font-weight: 800; }
+.gallery-file-field { display: grid; gap: 0.65rem; }
+.gallery-file-field input[type="file"] { font-size: 0.75rem; }
+.gallery-upload-card .form-input { min-width: 0; }
+.gallery-feed-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin: 0.1rem 0 0.85rem; }
+.gallery-feed-heading .page-eyebrow { margin-bottom: 0.1rem; font-size: 0.62rem; }
+.gallery-feed-heading > span { padding-bottom: 0.12rem; color: #7b8677; font-size: 0.76rem; white-space: nowrap; }
+.gallery-feed-card .panel-scroll-area { max-height: calc(100vh - 18rem) !important; min-height: 14rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.gallery-grid .gif-card { padding: 0.35rem !important; }
+.gallery-grid .gif-card-img { height: clamp(6rem, 11vw, 9rem) !important; }
+.gallery-grid .gif-card-caption { line-height: 1.25; }
+.gallery-feed-card .btn-see-all { margin-top: 0.7rem; }
+.home-dashboard { grid-template-columns: minmax(0, 1.05fr) minmax(19rem, 0.95fr); align-items: start; gap: 1rem; }
+.home-dashboard > .panel-card { grid-column: 1; }
+.home-dashboard-lower { display: contents; }
+.home-dashboard-lower > .panel-card:first-child { grid-column: 1; }
+.home-dashboard-lower > .panel-card:last-child { grid-column: 2; grid-row: 1 / span 2; }
+.home-dashboard .panel-card { align-self: start; }
+@media (max-width: 900px) {
+  .gallery-workspace { grid-template-columns: minmax(14rem, 0.36fr) minmax(0, 0.64fr); gap: 0.7rem; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-dashboard { grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.85fr); }
+}
+@media (max-width: 680px) {
+  .gallery-workspace { grid-template-columns: minmax(0, 1fr); }
+  .gallery-upload-card { position: static; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-feed-card .panel-scroll-area { max-height: 60vh !important; }
+  .home-dashboard { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .home-dashboard > .panel-card,
+  .home-dashboard-lower > .panel-card:first-child,
+  .home-dashboard-lower > .panel-card:last-child { grid-column: 1; grid-row: auto; }
+}
+
 /* ── Hato Daily visual refresh ──
    Tactile, calm and game-like: solid surfaces, small elevation and soft corners. */
 

@@ -36,7 +36,7 @@ export function GifGrid({ gifs, onReact }: GifGridProps) {
         style={{ maxHeight: GALLERY_GRID_MAX_HEIGHT }}
         data-tone="sky"
       >
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+        <div className="gallery-grid">
           {gifs.map((gif, index) => (
             <button
               key={gif.id}
