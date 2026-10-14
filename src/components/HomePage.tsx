@@ -52,7 +52,7 @@ export function HomePage() {
       <FloatingCritters />
       <AnnieNpc />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-6">
+      <div className="app-shell relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-7">
         {error && (
           <div
             className={`mb-4 rounded-2xl border-2 px-3 py-3 text-sm sm:px-4 ${

@@ -31,7 +31,7 @@ export function SiteHeader({
 
   return (
     <div
-      className={`relative mb-4 rounded-[20px] border-[3px] border-[#ffe066] bg-[#fff6b8] p-3 shadow-[0_6px_0_#f0d060,0_10px_24px_rgba(61,74,92,0.1)] sm:mb-5 sm:p-5 ${className}`}
+      className={`site-header relative mb-4 rounded-[20px] border-[3px] border-[#ffe066] bg-[#fff6b8] p-3 shadow-[0_6px_0_#f0d060,0_10px_24px_rgba(61,74,92,0.1)] sm:mb-5 sm:p-5 ${className}`}
     >
       {backHref && (
         <Link
