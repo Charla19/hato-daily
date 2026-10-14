@@ -43,12 +43,12 @@ export function InfoCard({ info, onVote }: InfoCardProps) {
     <div className={`info-item ${info.validated ? "validated" : ""}`}>
       {info.validated && (
         <span className="validation-badge mb-2 block w-fit rounded-full bg-[#38a169] px-1.5 py-0.5 text-[10px] font-bold text-white sm:float-right sm:mb-0">
-          📍 LOCATED ({info.trueVotes}+ ✅)
+          Located · {info.trueVotes}+ confirmed
         </span>
       )}
       <div className="info-header mb-1 text-sm font-bold">
         <span className={`tag ${config.tagClass} mr-1.5 rounded px-1.5 py-0.5 text-[10px] text-white`}>
-          {config.emoji} {config.label}
+          {config.label}
         </span>
         <span className="break-words">
           {info.validated

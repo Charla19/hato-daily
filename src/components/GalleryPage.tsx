@@ -2,7 +2,6 @@
 
 import { useGallery } from "@/hooks/useGallery";
 import { AnnieNpc } from "@/components/AnnieNpc";
-import { FloatingCritters } from "@/components/FloatingCritters";
 import { ForestEdge } from "@/components/ForestEdge";
 import { GifGrid } from "@/components/GifGrid";
 import { GifUploadForm } from "@/components/GifUploadForm";
@@ -41,7 +40,6 @@ export function GalleryPage() {
     <div className="app-root relative isolate min-h-screen">
       <WhimsyBackground />
       <ForestEdge />
-      <FloatingCritters />
       <AnnieNpc />
 
       <div className="app-shell relative z-10 mx-auto w-full max-w-6xl px-3 py-4 pb-8 sm:px-4 sm:py-7 sm:pb-10">
@@ -61,6 +59,14 @@ export function GalleryPage() {
         />
 
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
+
+        <div className="page-intro">
+          <div>
+            <p className="page-eyebrow">Heartopia community</p>
+            <h2 className="page-title">The village album</h2>
+          </div>
+          <p className="page-description">GIFs and screenshots from Heartopia, shared by the community.</p>
+        </div>
 
         <section className="gallery-page-card rounded-[20px] border-[3px] border-[#b8e4ff] bg-[#dff5ff] p-4 shadow-[0_5px_0_rgba(61,74,92,0.08),0_8px_20px_rgba(61,74,92,0.07)] sm:p-5">
           <GifUploadForm

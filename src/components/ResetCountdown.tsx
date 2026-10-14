@@ -42,7 +42,7 @@ export function ResetCountdownPanel({
       aria-live="polite"
       aria-label={`Next daily reset in ${hours} hours ${minutes} minutes ${seconds} seconds`}
     >
-      <p className="reset-countdown-label">⏳ Next Heartopia reset</p>
+      <p className="reset-countdown-label">Next Heartopia reset</p>
       <p className="reset-countdown-digits">
         <span className="reset-countdown-part">{hours}h</span>
         <span className="reset-countdown-sep">:</span>

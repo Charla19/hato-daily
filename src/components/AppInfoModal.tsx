@@ -9,14 +9,12 @@ type AppInfoModalProps = {
 };
 
 type InfoSection = {
-  emoji: string;
   title: string;
   items: string[];
 };
 
 const INFO_SECTIONS: InfoSection[] = [
   {
-    emoji: "🌸",
     title: "What is Hato Daily?",
     items: [
       "Daily board for Heartopia: fluorite/oak spots, outfit votes, gallery.",
@@ -24,7 +22,6 @@ const INFO_SECTIONS: InfoSection[] = [
     ],
   },
   {
-    emoji: "⏳",
     title: "Daily reset",
     items: [
       "All timers and daily flips use Heartopia Global Server time (6:00 AM Eastern).",
@@ -34,7 +31,6 @@ const INFO_SECTIONS: InfoSection[] = [
     ],
   },
   {
-    emoji: "👤",
     title: "Your pseudo",
     items: [
       "Pick a name once so people know it's you.",
@@ -42,37 +38,33 @@ const INFO_SECTIONS: InfoSection[] = [
     ],
   },
   {
-    emoji: "📍",
     title: "Today's Intel",
     items: [
       "Post fluorite spots, roaming oak, weather, whatever helps today.",
-      "✅ if it's right, ❌ if it's off. One vote per report.",
-      `Flawless Fluorite and Roaming Oak lock after ${VALIDATION_THRESHOLD}+ ✅ votes and rise to the top.`,
+      "Vote true or false on a report. One vote per report.",
+      `Flawless Fluorite and Roaming Oak lock after ${VALIDATION_THRESHOLD}+ true votes and rise to the top.`,
       "One confirmed fluorite and one confirmed oak per day.",
     ],
   },
   {
-    emoji: "👗",
     title: "Today's Runway",
     items: [
       "Hit the pink quiz button on the Runway panel.",
       "Answer 3 Heartopia questions. You need all 3 right to upload.",
-      `First ${MAX_OUTFIT_SLOTS} players per day get a slot. Everyone else can ❤️ vote.`,
+      `First ${MAX_OUTFIT_SLOTS} players per day get a slot. Everyone else can vote.`,
       "Yesterday's top look shows up as today's Style Icon.",
     ],
   },
   {
-    emoji: "🎬",
     title: "Gallery",
     items: [
       "Use the Gallery button in the header.",
       `Post Heartopia GIFs or screenshots with an optional caption (${MAX_GALLERY_CAPTION_LENGTH} chars max).`,
       `Posts stay in the gallery until removed from the database. ${MAX_GIFS_PER_USER_PER_DAY} uploads per player per day.`,
-      "React with the emotion panel: 😂 ❤️ 😍 🐛 💫 🧠. Tap a post for fullscreen scroll.",
+      "React with the emotion panel, or tap a post for fullscreen scroll.",
     ],
   },
   {
-    emoji: "🤝",
     title: "Keep it honest",
     items: [
       "Real in-game info only. No spam or off-topic stuff.",
@@ -121,7 +113,7 @@ export function AppInfoModal({ open, onClose }: AppInfoModalProps) {
               id="app-info-title"
               className="font-[family-name:var(--font-fredoka)] text-lg font-bold text-[#3d4a5c] sm:text-xl"
             >
-              ℹ️ How Hato Daily works
+              How Hato Daily works
             </h2>
             <p className="mt-1 text-xs text-[var(--ink-soft)] sm:text-sm">
               Stuff to know before you post
@@ -141,7 +133,7 @@ export function AppInfoModal({ open, onClose }: AppInfoModalProps) {
           {INFO_SECTIONS.map((section) => (
             <section key={section.title} className="app-info-section mb-3 last:mb-0">
               <h3 className="app-info-section-title">
-                <span aria-hidden="true">{section.emoji}</span> {section.title}
+                {section.title}
               </h3>
               <ul className="app-info-list">
                 {section.items.map((item) => (

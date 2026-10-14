@@ -22,9 +22,9 @@ export function WinnerBanner({ winner }: WinnerBannerProps) {
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0 w-full flex-1 text-center sm:text-left">
             <span className="winner-badge mb-2 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase">
-              👑 Yesterday&apos;s Style Icon
+              Yesterday&apos;s Style Icon
             </span>
-            <div className="winner-name text-lg font-bold sm:text-xl">{winner.username} ✨</div>
+            <div className="winner-name text-lg font-bold sm:text-xl">{winner.username}</div>
             <div className="winner-meta mt-1 space-y-0.5 text-sm">
               <div>
                 <strong>Server:</strong> {winner.server}
@@ -33,7 +33,7 @@ export function WinnerBanner({ winner }: WinnerBannerProps) {
                 <strong>Player ID:</strong> {winner.playerId}
               </div>
               <div>
-                <strong>Score:</strong> {winner.votes} votes ❤️
+                <strong>Score:</strong> {winner.votes} votes
               </div>
             </div>
           </div>

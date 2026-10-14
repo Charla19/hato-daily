@@ -7,7 +7,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { DailyInfoSection } from "@/components/DailyInfoSection";
 import { FashionShowSection } from "@/components/FashionShowSection";
 import { ForestEdge } from "@/components/ForestEdge";
-import { FloatingCritters } from "@/components/FloatingCritters";
 import { InfoSubmissionForm } from "@/components/InfoSubmissionForm";
 import { PseudoBar } from "@/components/PseudoBar";
 import { WhimsyBackground } from "@/components/WhimsyBackground";
@@ -49,7 +48,6 @@ export function HomePage() {
     <div className="app-root relative isolate min-h-screen">
       <WhimsyBackground />
       <ForestEdge />
-      <FloatingCritters />
       <AnnieNpc />
 
       <div className="app-shell relative z-10 mx-auto w-full max-w-6xl px-3 py-4 sm:px-4 sm:py-7">
@@ -69,20 +67,29 @@ export function HomePage() {
           <SiteHeader showGalleryLink />
         )}
 
+        {!winner && (
+          <div className="page-intro">
+            <div>
+              <p className="page-eyebrow">Your Heartopia, today</p>
+              <h2 className="page-title">The village board</h2>
+            </div>
+            <p className="page-description">
+              Find the latest discoveries, share a helpful sighting, and see who&apos;s dressing up today.
+            </p>
+          </div>
+        )}
+
         <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
 
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
-          <div className="min-w-0 flex-1 lg:w-[65%]">
-            <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />
+        <div className="home-dashboard">
+          <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />
+          <div className="home-dashboard-lower">
             <InfoSubmissionForm
               lockedTypes={lockedTypes}
               pseudo={pseudo}
               hasPseudo={Boolean(pseudo)}
               onSubmit={(payload) => submitInfo(payload)}
             />
-          </div>
-
-          <div className="min-w-0 lg:w-[35%] lg:max-w-md lg:shrink-0">
             <FashionShowSection
               outfits={outfits}
               slotsRemaining={slotsRemaining}

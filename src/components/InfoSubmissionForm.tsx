@@ -128,7 +128,7 @@ export function InfoSubmissionForm({
   }
 
   return (
-    <PanelCard tone="lavender" title="Share Intel" icon="➕" insect="butterfly-green">
+    <PanelCard tone="lavender" title="Share Intel">
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2.5">
           <label htmlFor="info-type" className="mb-1 block text-xs font-bold text-[var(--ink)]">
@@ -152,8 +152,8 @@ export function InfoSubmissionForm({
               return (
                 <option key={typeId} value={typeId} disabled={locked}>
                   {locked
-                    ? `${typeConfig.emoji} ${typeConfig.label} (Already located today!)`
-                    : `${typeConfig.emoji} ${typeConfig.label}`}
+                  ? `${typeConfig.label} (Already located today!)`
+                  : typeConfig.label}
                 </option>
               );
             })}

@@ -47,7 +47,7 @@ export function FashionShowSection({
 
   return (
     <>
-      <PanelCard tone="pink" title="Today's Runway" insect="butterfly-orange">
+      <PanelCard tone="pink" title="Today's Runway">
         <ResetCountdownPanel tone="pink" className="mb-3" />
 
         {hasSubmittedToday ? (
