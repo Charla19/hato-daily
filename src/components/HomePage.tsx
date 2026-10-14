@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useHatoDaily } from "@/hooks/useHatoDaily";
 import { AnnieNpc } from "@/components/AnnieNpc";
 import { SiteChromeExtras } from "@/components/SiteChromeExtras";
@@ -13,6 +14,7 @@ import { WhimsyBackground } from "@/components/WhimsyBackground";
 import { WinnerBanner } from "@/components/WinnerBanner";
 
 export function HomePage() {
+  const welcomeVideoRef = useRef<HTMLVideoElement>(null);
   const {
     loading,
     isLive,
@@ -30,6 +32,21 @@ export function HomePage() {
     likeOutfit,
     submitRunwayOutfit,
   } = useHatoDaily();
+
+  useEffect(() => {
+    const video = welcomeVideoRef.current;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isWideScreen = window.matchMedia("(min-width: 768px)").matches;
+
+    if (!video || prefersReducedMotion || !isWideScreen || connection?.saveData) return;
+
+    void video.play().catch(() => {
+      // The poster remains visible when autoplay is unavailable.
+    });
+
+    return () => video.pause();
+  }, []);
 
   if (loading) {
     return (
@@ -67,6 +84,19 @@ export function HomePage() {
         )}
 
         <section className="home-welcome" aria-labelledby="home-welcome-title">
+          <video
+            ref={welcomeVideoRef}
+            className="home-welcome-video"
+            poster="/assets/bg/heartopia-home-poster.webp"
+            preload="none"
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <source src="/videos/heartopia-home.mp4" type="video/mp4" />
+          </video>
           <div className="home-welcome-copy">
             <p className="home-welcome-kicker">Your Heartopia, today</p>
             <h2 id="home-welcome-title">The village is waiting.</h2>
