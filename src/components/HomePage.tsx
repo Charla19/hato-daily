@@ -39,14 +39,14 @@ export function HomePage() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isWideScreen = window.matchMedia("(min-width: 768px)").matches;
 
-    if (!video || prefersReducedMotion || !isWideScreen || connection?.saveData) return;
+    if (loading || !video || prefersReducedMotion || !isWideScreen || connection?.saveData) return;
 
     void video.play().catch(() => {
       // The poster remains visible when autoplay is unavailable.
     });
 
     return () => video.pause();
-  }, []);
+  }, [loading]);
 
   if (loading) {
     return (
