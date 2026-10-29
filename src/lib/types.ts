@@ -48,3 +48,22 @@ export type GifEntry = {
   reactionVotes: Record<GifReactionType, number>;
   userReaction?: GifReactionType;
 };
+
+export type BuildKind = "photo" | "video";
+export type BuildReactionType = "love" | "inspiring" | "try_it";
+
+export type BuildEntry = {
+  id: string;
+  kind: BuildKind;
+  title: string;
+  description: string;
+  category?: string | null;
+  author: string;
+  server?: string | null;
+  openToVisitors: boolean;
+  photoUrl?: string | null;
+  youtubeVideoId?: string | null;
+  createdAt: string;
+  reactionVotes: Record<BuildReactionType, number>;
+  userReaction?: BuildReactionType;
+};

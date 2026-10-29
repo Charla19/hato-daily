@@ -9,6 +9,12 @@ export const MAX_GIFS_PER_USER_PER_DAY = 5;
 /** Heartopia in-game chat line length (approx.). */
 export const MAX_GALLERY_CAPTION_LENGTH = 80;
 export const MAX_GALLERY_FILE_BYTES = 8 * 1024 * 1024;
+export const MAX_BUILDS_PER_USER_PER_DAY = 3;
+export const MAX_BUILD_PHOTO_BYTES = 3 * 1024 * 1024;
+export const MAX_BUILD_TITLE_LENGTH = 80;
+export const MAX_BUILD_DESCRIPTION_LENGTH = 500;
+export const MAX_BUILD_CATEGORY_LENGTH = 28;
+export const MAX_BUILD_SERVER_LENGTH = 40;
 /** @deprecated Use MAX_GALLERY_FILE_BYTES */
 export const MAX_GIF_FILE_BYTES = MAX_GALLERY_FILE_BYTES;
 

@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useHatoDaily } from "@/hooks/useHatoDaily";
 import { AnnieNpc } from "@/components/AnnieNpc";
 import { SiteChromeExtras } from "@/components/SiteChromeExtras";
 import { SiteHeader } from "@/components/SiteHeader";
 import { DailyInfoSection } from "@/components/DailyInfoSection";
+import { BuildsSpotlight } from "@/components/BuildsSpotlight";
 import { FashionShowSection } from "@/components/FashionShowSection";
 import { ForestEdge } from "@/components/ForestEdge";
 import { InfoSubmissionForm } from "@/components/InfoSubmissionForm";
@@ -100,10 +102,11 @@ export function HomePage() {
           <div className="home-welcome-copy">
             <p className="home-welcome-kicker">Your Heartopia, today</p>
             <h2 id="home-welcome-title">The village is waiting.</h2>
-            <p>Catch up on today&apos;s finds, share something you spotted, and cheer on a villager&apos;s look.</p>
+            <p>Catch up on today&apos;s finds, share something you spotted, or discover a new Heartopia build.</p>
             <div className="home-welcome-actions">
               <a href="#share-intel" className="welcome-action welcome-action-primary">Share a discovery <span aria-hidden="true">→</span></a>
               <a href="#runway" className="welcome-action welcome-action-secondary">Visit the runway</a>
+              <Link href="/builds" className="welcome-action welcome-action-builds">Explore builds</Link>
             </div>
           </div>
           <div className="home-welcome-player">
@@ -112,6 +115,8 @@ export function HomePage() {
           <AnnieNpc placement="welcome" />
           <span className="home-welcome-location" aria-hidden="true">HEARTOPIA · VILLAGE LIFE</span>
         </section>
+
+        <BuildsSpotlight />
 
         <div className="home-dashboard">
           <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />

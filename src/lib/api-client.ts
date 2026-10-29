@@ -1,4 +1,4 @@
-import type { DailyInfo, GifEntry, GifReactionType, OutfitEntry, OutfitSubmission, OutfitWinner } from "@/lib/types";
+import type { BuildEntry, BuildKind, BuildReactionType, DailyInfo, GifEntry, GifReactionType, OutfitEntry, OutfitSubmission, OutfitWinner } from "@/lib/types";
 
 export type DashboardResponse = {
   dayKey: string;
@@ -20,6 +20,24 @@ export type GalleryResponse = {
   uploadsRemaining: number;
   maxUploadsPerDay: number;
   pseudo: string | null;
+};
+
+export type BuildsResponse = {
+  builds: BuildEntry[];
+  uploadsRemaining: number;
+  maxUploadsPerDay: number;
+  pseudo: string | null;
+};
+
+export type BuildSubmission = {
+  kind: BuildKind;
+  title: string;
+  description: string;
+  category?: string;
+  server?: string;
+  openToVisitors?: boolean;
+  photoDataUrl?: string;
+  youtubeUrl?: string;
 };
 
 export type IntelSubmission = {
@@ -61,6 +79,46 @@ export async function fetchGallery(voterId: string): Promise<GalleryResponse> {
   }
 
   return response.json();
+}
+
+export async function fetchBuilds(voterId: string): Promise<BuildsResponse> {
+  const response = await fetch(`/api/builds?voterId=${encodeURIComponent(voterId)}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) throw new Error(await parseError(response));
+  return response.json();
+}
+
+export async function submitBuild(
+  voterId: string,
+  pseudo: string,
+  submission: BuildSubmission,
+): Promise<{ build: BuildEntry; pseudo: string }> {
+  const response = await fetch("/api/builds", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ voterId, pseudo, ...submission }),
+  });
+
+  if (!response.ok) throw new Error(await parseError(response));
+  return response.json();
+}
+
+export async function reactToBuild(
+  buildId: string,
+  voterId: string,
+  reaction: BuildReactionType,
+): Promise<BuildEntry> {
+  const response = await fetch(`/api/builds/${buildId}/react`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ voterId, reaction }),
+  });
+
+  if (!response.ok) throw new Error(await parseError(response));
+  const body = await response.json();
+  return body.build;
 }
 
 export async function saveProfile(pseudo: string): Promise<string> {

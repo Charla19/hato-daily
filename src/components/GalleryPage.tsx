@@ -55,6 +55,7 @@ export function GalleryPage() {
 
         <SiteHeader
           backHref="/"
+          currentPage="gallery"
           subtitle="GIFs and screenshots from Heartopia"
         />
 

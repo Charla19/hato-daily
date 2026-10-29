@@ -18,7 +18,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Hato Daily | Heartopia dailies",
   description:
-    "Daily fluorite and roaming oak spots, outfit votes, and GIF wall for Heartopia players.",
+    "Heartopia daily discoveries, community looks, village photos, and house-build tutorials.",
 };
 
 export default function RootLayout({
