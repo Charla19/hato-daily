@@ -2758,3 +2758,19 @@ textarea.form-input { min-height: 76px; }
   .home-welcome-copy > p:not(.home-welcome-kicker) { max-width: 34ch; }
   .home-feed-column > .panel-card:first-child { padding: 0.8rem !important; }
 }
+
+/* The name control lives in the navigation row instead of taking a page row. */
+.site-player-slot { min-width: 0; margin-left: 0.15rem; }
+.site-player-bar { max-width: 280px; min-width: 0; margin: 0 !important; border: 1px solid #d9dfd2 !important; border-radius: 999px !important; padding: 0.24rem 0.35rem 0.24rem 0.7rem !important; background: #f4f5ec !important; box-shadow: none !important; }
+.site-player-bar > div { display: flex; align-items: center; justify-content: flex-start; gap: 0.35rem !important; }
+.site-player-bar p { overflow: hidden; margin: 0; color: #566656 !important; font-size: 0.72rem !important; text-overflow: ellipsis; white-space: nowrap; }
+.site-player-bar p strong { color: #4d5771 !important; }
+.site-player-bar button { min-height: 31px; flex: none; border: 1px solid #d9dfd2 !important; border-radius: 999px !important; padding: 0.3rem 0.55rem !important; background: #fffdf8 !important; color: #526553 !important; font-size: 0.68rem !important; }
+.site-player-bar button:hover { border-color: #cbb8ff !important; }
+.site-player-bar form { align-items: center !important; gap: 0.35rem !important; }
+.site-player-bar form > div:first-child { min-width: 110px; max-width: 150px; }
+.site-player-bar form > div:first-child > p { display: none; }
+.site-player-bar form label { margin-bottom: 0.12rem !important; font-size: 0.63rem !important; }
+.site-player-bar input { min-height: 32px !important; padding: 0.3rem 0.45rem !important; font-size: 0.75rem !important; }
+.site-player-bar form > div:last-of-type { gap: 0.25rem !important; }
+.home-app-shell > .home-dashboard { grid-template-rows: minmax(0, 1fr) !important; }

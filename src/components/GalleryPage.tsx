@@ -5,7 +5,6 @@ import { AnnieNpc } from "@/components/AnnieNpc";
 import { ForestEdge } from "@/components/ForestEdge";
 import { GifGrid } from "@/components/GifGrid";
 import { GifUploadForm } from "@/components/GifUploadForm";
-import { PseudoBar } from "@/components/PseudoBar";
 import { SiteChromeExtras } from "@/components/SiteChromeExtras";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhimsyBackground } from "@/components/WhimsyBackground";
@@ -57,9 +56,8 @@ export function GalleryPage() {
           backHref="/"
           currentPage="gallery"
           subtitle="GIFs and screenshots from Heartopia"
+          player={{ pseudo, onSave: savePseudo, isLive }}
         />
-
-        <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
 
         <div className="page-intro gallery-intro">
           <div>

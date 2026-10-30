@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { GameDayLabel } from "@/components/GameDayLabel";
 import { InstallAppButton } from "@/components/InstallAppButton";
+import { PseudoBar } from "@/components/PseudoBar";
 
 type SiteHeaderProps = {
   backHref?: string;
@@ -9,6 +10,11 @@ type SiteHeaderProps = {
   subtitle?: string;
   showGalleryLink?: boolean;
   currentPage?: "gallery" | "builds";
+  player?: {
+    pseudo: string | null;
+    onSave: (pseudo: string) => Promise<void>;
+    isLive: boolean;
+  };
   className?: string;
   children?: ReactNode;
 };
@@ -19,6 +25,7 @@ export function SiteHeader({
   subtitle = "Your cozy corner for Heartopia dailies",
   showGalleryLink = false,
   currentPage,
+  player,
   className = "",
   children,
 }: SiteHeaderProps) {
@@ -47,6 +54,17 @@ export function SiteHeader({
             (backHref || showGalleryLink) && <Link href="/builds" className="site-nav-link">Builds</Link>
           )}
           <InstallAppButton />
+          {player && (
+            <div className="site-player-slot">
+              <PseudoBar
+                pseudo={player.pseudo}
+                onSave={player.onSave}
+                isLive={player.isLive}
+                compact
+                className="site-player-bar"
+              />
+            </div>
+          )}
         </nav>
 
         <GameDayLabel className="site-date" />

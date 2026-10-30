@@ -1,13 +1,18 @@
-import type { OutfitWinner } from "@/lib/types";
 import { SiteHeader } from "@/components/SiteHeader";
+import type { OutfitWinner } from "@/lib/types";
 
 type WinnerBannerProps = {
   winner: OutfitWinner;
+  player: {
+    pseudo: string | null;
+    onSave: (pseudo: string) => Promise<void>;
+    isLive: boolean;
+  };
 };
 
-export function WinnerBanner({ winner }: WinnerBannerProps) {
+export function WinnerBanner({ winner, player }: WinnerBannerProps) {
   return (
-    <SiteHeader showGalleryLink className="winner-banner mb-5">
+    <SiteHeader showGalleryLink player={player} className="winner-banner mb-5">
       <div className="winner-inner winner-card relative mt-3 p-3 sm:mt-4 sm:p-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

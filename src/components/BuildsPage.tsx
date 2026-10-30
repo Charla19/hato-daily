@@ -6,7 +6,6 @@ import { AnnieNpc } from "@/components/AnnieNpc";
 import { BuildCard } from "@/components/BuildCard";
 import { BuildUploadForm } from "@/components/BuildUploadForm";
 import { ForestEdge } from "@/components/ForestEdge";
-import { PseudoBar } from "@/components/PseudoBar";
 import { SiteChromeExtras } from "@/components/SiteChromeExtras";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhimsyBackground } from "@/components/WhimsyBackground";
@@ -45,8 +44,12 @@ export function BuildsPage() {
     <div className="app-root relative isolate min-h-screen">
       <WhimsyBackground /><ForestEdge /><AnnieNpc />
       <div className="app-shell builds-shell relative z-10 mx-auto w-full max-w-7xl px-3 py-3 pb-8 sm:px-5 sm:py-5 sm:pb-10">
-        <SiteHeader backHref="/" currentPage="builds" subtitle="Homes, little details, and build ideas from Heartopia" />
-        <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} />
+        <SiteHeader
+          backHref="/"
+          currentPage="builds"
+          subtitle="Homes, little details, and build ideas from Heartopia"
+          player={{ pseudo, onSave: savePseudo, isLive }}
+        />
 
         <section className="builds-intro" aria-labelledby="builds-title">
           <div>

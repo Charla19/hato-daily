@@ -8,9 +8,10 @@ type PseudoBarProps = {
   onSave: (pseudo: string) => Promise<void>;
   isLive: boolean;
   className?: string;
+  compact?: boolean;
 };
 
-export function PseudoBar({ pseudo, onSave, isLive, className = "" }: PseudoBarProps) {
+export function PseudoBar({ pseudo, onSave, isLive, className = "", compact = false }: PseudoBarProps) {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState("");
   const [saving, setSaving] = useState(false);
@@ -89,14 +90,14 @@ export function PseudoBar({ pseudo, onSave, isLive, className = "" }: PseudoBarP
       ) : pseudo ? (
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-[var(--ink)]">
-            Playing as <strong className="text-[var(--plum-dark)]">{pseudo}</strong>
+            {compact ? null : "Playing as "}<strong className="text-[var(--plum-dark)]">{pseudo}</strong>
           </p>
           <button
             type="button"
             onClick={startEdit}
             className="self-start rounded-xl border-2 border-[#d8e2ec] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ink-soft)] hover:border-[#cbb8ff] sm:self-auto"
           >
-            Change name
+            {compact ? "Edit name" : "Change name"}
           </button>
         </div>
       ) : (

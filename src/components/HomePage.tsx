@@ -11,7 +11,6 @@ import { BuildsSpotlight } from "@/components/BuildsSpotlight";
 import { FashionShowSection } from "@/components/FashionShowSection";
 import { ForestEdge } from "@/components/ForestEdge";
 import { InfoSubmissionForm } from "@/components/InfoSubmissionForm";
-import { PseudoBar } from "@/components/PseudoBar";
 import { WhimsyBackground } from "@/components/WhimsyBackground";
 import { WinnerBanner } from "@/components/WinnerBanner";
 
@@ -80,9 +79,12 @@ export function HomePage() {
         )}
 
         {winner ? (
-          <WinnerBanner winner={winner} />
+          <WinnerBanner
+            winner={winner}
+            player={{ pseudo, onSave: savePseudo, isLive }}
+          />
         ) : (
-          <SiteHeader showGalleryLink />
+          <SiteHeader showGalleryLink player={{ pseudo, onSave: savePseudo, isLive }} />
         )}
 
         <section className="home-welcome" aria-labelledby="home-welcome-title">
@@ -112,8 +114,6 @@ export function HomePage() {
           <AnnieNpc placement="welcome" />
           <span className="home-welcome-location" aria-hidden="true">HEARTOPIA · VILLAGE LIFE</span>
         </section>
-
-        <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} className="home-pseudo-bar" />
 
         <div className="home-dashboard">
           <aside className="home-discovery-rail" aria-label="Explore the village">
