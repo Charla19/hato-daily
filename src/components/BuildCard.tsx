@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { BuildReactionBar } from "@/components/BuildReactionBar";
 import type { BuildEntry, BuildReactionType } from "@/lib/types";
 
@@ -8,6 +8,7 @@ export function BuildCard({ build, onReact }: {
   build: BuildEntry;
   onReact: (id: string, reaction: BuildReactionType) => Promise<void>;
 }) {
+  const imageDialogRef = useRef<HTMLDialogElement>(null);
   const [playing, setPlaying] = useState(false);
   const [thumbnailFailed, setThumbnailFailed] = useState(false);
   const [reactionError, setReactionError] = useState<string | null>(null);
@@ -31,7 +32,45 @@ export function BuildCard({ build, onReact }: {
   return (
     <article className="build-card">
       {build.kind === "photo" && build.photoUrl ? (
-        <img className="build-card-image" src={build.photoUrl} alt={`Heartopia build: ${build.title}`} loading="lazy" />
+        <>
+          <button
+            type="button"
+            className="build-card-image-button"
+            onClick={() => imageDialogRef.current?.showModal()}
+            aria-label={`Open photo: ${build.title}`}
+            aria-haspopup="dialog"
+          >
+            <img className="build-card-image" src={build.photoUrl} alt="" loading="lazy" />
+            <span className="build-card-image-hint">View photo</span>
+          </button>
+          <dialog
+            ref={imageDialogRef}
+            className="build-image-dialog"
+            aria-labelledby={`build-image-title-${build.id}`}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) imageDialogRef.current?.close();
+            }}
+          >
+            <button
+              type="button"
+              className="build-image-dialog-close"
+              onClick={() => imageDialogRef.current?.close()}
+              aria-label="Close photo"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <img className="build-image-dialog-photo" src={build.photoUrl} alt={build.title} />
+            <div className="build-image-dialog-caption">
+              <div>
+                <h2 id={`build-image-title-${build.id}`}>{build.title}</h2>
+                <p>{build.description}</p>
+                <span>{build.author}{build.openToVisitors && build.server ? ` · ${build.server}` : ""}</span>
+              </div>
+              <BuildReactionBar build={build} onReact={(reaction) => handleReact(reaction)} />
+            </div>
+            {reactionError && <p className="build-reaction-error" role="status">{reactionError}</p>}
+          </dialog>
+        </>
       ) : (
         <div className="build-card-video-shell">
           {playing && videoId ? (
