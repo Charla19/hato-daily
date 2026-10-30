@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Hato Daily | Heartopia community",
     short_name: "Hato Daily",
     description: "Heartopia daily discoveries, community looks, and home builds.",
+    lang: "en",
     start_url: "/",
     scope: "/",
     display: "standalone",

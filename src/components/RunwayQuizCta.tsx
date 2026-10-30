@@ -1,6 +1,6 @@
 "use client";
 
-import { MAX_OUTFIT_SLOTS } from "@/lib/constants";
+import { MAX_OUTFIT_SLOTS, QUIZ_QUESTION_COUNT } from "@/lib/constants";
 
 type RunwayQuizCtaProps = {
   slotsRemaining: number;
@@ -22,7 +22,7 @@ export function RunwayQuizCta({ slotsRemaining, onClick }: RunwayQuizCtaProps) {
         <span className="runway-quiz-cta-text">
           <span className="runway-quiz-cta-title">Pass the quiz, post your look</span>
           <span className="runway-quiz-cta-sub">
-            3 Heartopia questions · all correct · {slotsRemaining}/{MAX_OUTFIT_SLOTS} slots left
+            {QUIZ_QUESTION_COUNT} Heartopia question · answer correctly · {slotsRemaining}/{MAX_OUTFIT_SLOTS} slots left
           </span>
         </span>
         <span className="runway-quiz-cta-arrow" aria-hidden="true">

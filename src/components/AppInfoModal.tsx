@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { MAX_GIFS_PER_USER_PER_DAY, MAX_GALLERY_CAPTION_LENGTH, MAX_OUTFIT_SLOTS, VALIDATION_THRESHOLD } from "@/lib/constants";
+import { MAX_GIFS_PER_USER_PER_DAY, MAX_GALLERY_CAPTION_LENGTH, MAX_OUTFIT_SLOTS, QUIZ_QUESTION_COUNT, VALIDATION_THRESHOLD } from "@/lib/constants";
 
 type AppInfoModalProps = {
   open: boolean;
@@ -50,7 +50,7 @@ const INFO_SECTIONS: InfoSection[] = [
     title: "Today's Runway",
     items: [
       "Hit the pink quiz button on the Runway panel.",
-      "Answer 3 Heartopia questions. You need all 3 right to upload.",
+      `Answer ${QUIZ_QUESTION_COUNT} Heartopia question to unlock an upload.`,
       `First ${MAX_OUTFIT_SLOTS} players per day get a slot. Everyone else can vote.`,
       "Yesterday's top look shows up as today's Style Icon.",
     ],

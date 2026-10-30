@@ -47,26 +47,8 @@ export function FashionShowSection({
 
   return (
     <>
-      <PanelCard id="runway" tone="pink" title="Today's Runway">
+      <PanelCard id="runway" tone="pink" title="Today's Runway" className="runway-panel">
         <ResetCountdownPanel tone="pink" className="mb-3" />
-
-        {hasSubmittedToday ? (
-          <div className="status-ok mb-3 rounded-xl px-3 py-3 text-center">
-            <p className="text-sm font-bold">You&apos;re on today&apos;s runway!</p>
-            <p className="mt-1 text-xs text-[var(--ink-soft)]">
-              Good luck with the votes. Come back tomorrow for another shot at Style Icon.
-            </p>
-          </div>
-        ) : slotsFull ? (
-          <div className="status-full mb-3 rounded-xl px-3 py-3 text-center">
-            <p className="text-sm font-bold">Dressing room full</p>
-            <p className="mt-1 text-xs text-[var(--ink-soft)]">
-              All {MAX_OUTFIT_SLOTS} slots claimed. Reset in <ResetCountdown />.
-            </p>
-          </div>
-        ) : (
-          <RunwayQuizCta slotsRemaining={slotsRemaining} onClick={() => setQuizOpen(true)} />
-        )}
 
         {outfits.length === 0 ? (
           <p className="py-4 text-center text-sm text-[var(--ink-soft)]">
@@ -79,7 +61,7 @@ export function FashionShowSection({
               style={{ maxHeight: RUNWAY_PREVIEW_MAX_HEIGHT }}
               data-tone="pink"
             >
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <div className={`grid ${outfits.length === 1 ? "runway-gallery-one grid-cols-1" : "grid-cols-2"} gap-2 sm:gap-3`}>
                 {outfits.map((outfit, index) => (
                   <div key={outfit.id} className="fashion-card p-2 text-center">
                     {outfit.imageUrl ? (
@@ -127,9 +109,29 @@ export function FashionShowSection({
           </>
         )}
 
-        <p className="mt-2 text-center text-[11px] text-[var(--ink-soft)]">
+        <p className="runway-hint mt-2 text-center text-[11px] text-[var(--ink-soft)]">
           Tap a look to view it bigger.
         </p>
+
+        <div className="runway-footer-action">
+          {hasSubmittedToday ? (
+            <div className="status-ok rounded-xl px-3 py-2 text-center">
+              <p className="text-sm font-bold">You&apos;re on today&apos;s runway!</p>
+              <p className="mt-1 text-xs text-[var(--ink-soft)]">
+                Good luck with the votes. Come back tomorrow for another shot at Style Icon.
+              </p>
+            </div>
+          ) : slotsFull ? (
+            <div className="status-full rounded-xl px-3 py-2 text-center">
+              <p className="text-sm font-bold">Dressing room full</p>
+              <p className="mt-1 text-xs text-[var(--ink-soft)]">
+                All {MAX_OUTFIT_SLOTS} slots claimed. Reset in <ResetCountdown />.
+              </p>
+            </div>
+          ) : (
+            <RunwayQuizCta slotsRemaining={slotsRemaining} onClick={() => setQuizOpen(true)} />
+          )}
+        </div>
       </PanelCard>
 
       <QuizModal

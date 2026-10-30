@@ -1,27 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 type InstallPromptEvent = Event & {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 };
 
+function isInstalledSnapshot() {
+  return window.matchMedia("(display-mode: standalone)").matches
+    || Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
+}
+
+function subscribeToInstalled(callback: () => void) {
+  const displayMode = window.matchMedia("(display-mode: standalone)");
+  displayMode.addEventListener("change", callback);
+  window.addEventListener("appinstalled", callback);
+
+  return () => {
+    displayMode.removeEventListener("change", callback);
+    window.removeEventListener("appinstalled", callback);
+  };
+}
+
 export function InstallAppButton() {
   const promptRef = useRef<InstallPromptEvent | null>(null);
-  const [ios, setIos] = useState(false);
-  const [installed, setInstalled] = useState(false);
+  const installed = useSyncExternalStore(subscribeToInstalled, isInstalledSnapshot, () => false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [isIos, setIsIos] = useState(false);
 
   useEffect(() => {
-    const userAgent = window.navigator.userAgent;
-    const isAppleMobile = /iPhone|iPad|iPod/.test(userAgent)
-      || (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
-    const isStandalone = window.matchMedia("(display-mode: standalone)").matches
-      || Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
-
-    setIos(isAppleMobile);
-    setInstalled(isStandalone);
+    if ("serviceWorker" in navigator) {
+      void navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(() => undefined);
+    }
 
     function handleBeforeInstall(event: Event) {
       event.preventDefault();
@@ -30,7 +41,6 @@ export function InstallAppButton() {
 
     function handleInstalled() {
       promptRef.current = null;
-      setInstalled(true);
       setHelpOpen(false);
     }
 
@@ -57,6 +67,9 @@ export function InstallAppButton() {
   async function handleInstall() {
     const prompt = promptRef.current;
     if (!prompt) {
+      const userAgent = window.navigator.userAgent;
+      setIsIos(/iPhone|iPad|iPod/.test(userAgent)
+        || (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1));
       setHelpOpen((open) => !open);
       return;
     }
@@ -64,7 +77,7 @@ export function InstallAppButton() {
     try {
       await prompt.prompt();
       const choice = await prompt.userChoice;
-      if (choice.outcome === "accepted") setInstalled(true);
+      if (choice.outcome === "accepted") setHelpOpen(false);
     } catch {
       setHelpOpen(true);
     } finally {
@@ -93,7 +106,7 @@ export function InstallAppButton() {
         <div className="pwa-install-help" id="pwa-install-help" role="dialog" aria-label="Add Hato Daily to your home screen">
           <button type="button" className="pwa-install-help-close" onClick={() => setHelpOpen(false)} aria-label="Close instructions">×</button>
           <strong>Keep Hato Daily one tap away</strong>
-          {ios ? (
+          {isIos ? (
             <p id="pwa-install-description">Tap Share in your browser, choose Add to Home Screen, then tap Add.</p>
           ) : (
             <p id="pwa-install-description">Open your browser menu and choose Install app or Add to Home screen.</p>

@@ -192,8 +192,8 @@ export function QuizModal({
                 Want on today&apos;s runway? Pass the quiz first.
               </p>
               <ul className="mb-5 space-y-2 text-left text-sm text-[var(--ink-soft)]">
-                <li>• Answer {QUIZ_QUESTION_COUNT} Heartopia trivia questions</li>
-                <li>• Get all {QUIZ_QUESTION_COUNT} right or you retry</li>
+                <li>• Answer one Heartopia trivia question</li>
+                <li>• Get it right to unlock an upload slot</li>
                 <li>• First {MAX_OUTFIT_SLOTS} players to pass get an upload slot</li>
                 <li>• Votes run 24h. Top look becomes tomorrow&apos;s Style Icon</li>
               </ul>

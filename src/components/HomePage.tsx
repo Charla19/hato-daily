@@ -126,13 +126,15 @@ export function HomePage() {
           </aside>
 
           <main className="home-feed-column" aria-label="Today's Heartopia discoveries">
-            <InfoSubmissionForm
-              lockedTypes={lockedTypes}
-              pseudo={pseudo}
-              hasPseudo={Boolean(pseudo)}
-              onSubmit={(payload) => submitInfo(payload)}
-            />
-            <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />
+            <div className="home-community-stream">
+              <InfoSubmissionForm
+                lockedTypes={lockedTypes}
+                pseudo={pseudo}
+                hasPseudo={Boolean(pseudo)}
+                onSubmit={(payload) => submitInfo(payload)}
+              />
+              <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />
+            </div>
           </main>
 
           <aside className="home-runway-column" aria-label="Community fashion runway">

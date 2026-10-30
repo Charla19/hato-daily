@@ -46,9 +46,14 @@ export function PseudoBar({ pseudo, onSave, isLive, className = "", compact = fa
   if (!isLive) return null;
 
   return (
-    <div className={`pseudo-bar relative z-10 mb-4 rounded-2xl border-[3px] border-[#9ee8be] bg-[#c8f5dc] px-3 py-3 shadow-[0_4px_0_rgba(61,74,92,0.06)] sm:px-4 ${className}`}>
+    <div className={`pseudo-bar relative z-10 mb-4 rounded-2xl border-[3px] border-[#9ee8be] bg-[#c8f5dc] px-3 py-3 shadow-[0_4px_0_rgba(61,74,92,0.06)] sm:px-4 ${className} ${compact && editing ? "is-editing" : ""}`}>
       {editing ? (
-        <form onSubmit={(event) => void handleSave(event)} className="flex flex-col gap-2 sm:flex-row sm:items-end">
+        <form
+          id={compact ? "pseudo-edit-form" : undefined}
+          onSubmit={(event) => void handleSave(event)}
+          className="flex flex-col gap-2 sm:flex-row sm:items-end"
+          aria-label={compact ? "Edit your pseudo" : undefined}
+        >
           <div className="flex-1">
             <label htmlFor="pseudo-edit" className="mb-1 block text-xs font-bold text-[var(--plum-dark)]">
               Your pseudo
@@ -96,6 +101,8 @@ export function PseudoBar({ pseudo, onSave, isLive, className = "", compact = fa
             type="button"
             onClick={startEdit}
             className="self-start rounded-xl border-2 border-[#d8e2ec] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ink-soft)] hover:border-[#cbb8ff] sm:self-auto"
+            aria-expanded={editing}
+            aria-controls={editing && compact ? "pseudo-edit-form" : undefined}
           >
             {compact ? "Edit name" : "Change name"}
           </button>

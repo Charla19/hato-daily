@@ -1,6 +1,6 @@
 export const VALIDATION_THRESHOLD = 20;
 export const MAX_OUTFIT_SLOTS = 50;
-export const QUIZ_QUESTION_COUNT = 3;
+export const QUIZ_QUESTION_COUNT = 1;
 export const INTEL_PREVIEW_MAX_HEIGHT = "42vh";
 export const INTEL_MODAL_MAX_HEIGHT = "90vh";
 export const RUNWAY_PREVIEW_MAX_HEIGHT = "44vh";
