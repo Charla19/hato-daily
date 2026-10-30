@@ -61,19 +61,6 @@ export function BuildsPage() {
         </section>
 
         <section className="builds-workspace" aria-label="Share and discover Heartopia builds">
-          <aside className="build-upload-card" id="build-share">
-            <div className="build-section-heading">
-              <span className="build-heading-mark" aria-hidden="true">✦</span>
-              <div><h2>Share your build</h2><p>A photo or a YouTube tutorial</p></div>
-            </div>
-            <BuildUploadForm
-              hasPseudo={Boolean(pseudo)}
-              uploadsRemaining={uploadsRemaining}
-              isLive={isLive}
-              onPublish={publishBuild}
-            />
-          </aside>
-
           <section className="build-feed-card" aria-label="Community builds">
             <div className="build-feed-header">
               <div>
@@ -126,6 +113,19 @@ export function BuildsPage() {
               </div>
             ) : null}
           </section>
+
+          <aside className="build-upload-card" id="build-share">
+            <div className="build-section-heading">
+              <span className="build-heading-mark" aria-hidden="true">✦</span>
+              <div><h2>Share your build</h2><p>A photo or a YouTube tutorial</p></div>
+            </div>
+            <BuildUploadForm
+              hasPseudo={Boolean(pseudo)}
+              uploadsRemaining={uploadsRemaining}
+              isLive={isLive}
+              onPublish={publishBuild}
+            />
+          </aside>
         </section>
 
         <SiteChromeExtras />

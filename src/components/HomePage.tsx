@@ -109,24 +109,33 @@ export function HomePage() {
               <Link href="/builds" className="welcome-action welcome-action-builds">Explore builds</Link>
             </div>
           </div>
-          <div className="home-welcome-player">
-            <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} className="home-pseudo-bar" />
-          </div>
           <AnnieNpc placement="welcome" />
           <span className="home-welcome-location" aria-hidden="true">HEARTOPIA · VILLAGE LIFE</span>
         </section>
 
-        <BuildsSpotlight />
+        <PseudoBar pseudo={pseudo} onSave={savePseudo} isLive={isLive} className="home-pseudo-bar" />
 
         <div className="home-dashboard">
-          <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />
-          <div className="home-dashboard-lower">
+          <aside className="home-discovery-rail" aria-label="Explore the village">
+            <BuildsSpotlight />
+            <Link href="/gallery" className="home-album-link">
+              <span className="home-album-stamp" aria-hidden="true">◉</span>
+              <span><strong>Village album</strong><small>See what everyone spotted</small></span>
+              <span className="home-album-arrow" aria-hidden="true">→</span>
+            </Link>
+          </aside>
+
+          <main className="home-feed-column" aria-label="Today's Heartopia discoveries">
             <InfoSubmissionForm
               lockedTypes={lockedTypes}
               pseudo={pseudo}
               hasPseudo={Boolean(pseudo)}
               onSubmit={(payload) => submitInfo(payload)}
             />
+            <DailyInfoSection items={dailyInfo} onVote={(id, vote) => void voteInfo(id, vote)} />
+          </main>
+
+          <aside className="home-runway-column" aria-label="Community fashion runway">
             <FashionShowSection
               outfits={outfits}
               slotsRemaining={slotsRemaining}
@@ -135,7 +144,7 @@ export function HomePage() {
               onVote={(id) => void likeOutfit(id)}
               onSubmitOutfit={submitRunwayOutfit}
             />
-          </div>
+          </aside>
         </div>
 
         <SiteChromeExtras />

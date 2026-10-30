@@ -70,22 +70,22 @@ export function GalleryPage() {
         </div>
 
         <section className="gallery-workspace">
+          <div className="gallery-feed-card">
+            <div className="gallery-feed-heading"><div><p className="page-eyebrow">Community snapshots</p><h2>Village album</h2></div><span>{gifs.length} {gifs.length === 1 ? "memory" : "memories"}</span></div>
+            <GifGrid gifs={gifs} onReact={reactGif} />
+          </div>
           <aside className="gallery-upload-card">
             <div className="gallery-upload-heading">
               <span className="gallery-upload-glyph" aria-hidden="true">＋</span>
               <div><h2>Share a moment</h2><p>From your Heartopia camera roll</p></div>
             </div>
-          <GifUploadForm
-            hasPseudo={Boolean(pseudo)}
-            uploadsRemaining={uploadsRemaining}
-            isLive={isLive}
-            onUpload={uploadGif}
-          />
+            <GifUploadForm
+              hasPseudo={Boolean(pseudo)}
+              uploadsRemaining={uploadsRemaining}
+              isLive={isLive}
+              onUpload={uploadGif}
+            />
           </aside>
-          <div className="gallery-feed-card">
-            <div className="gallery-feed-heading"><div><p className="page-eyebrow">Community snapshots</p><h2>Village album</h2></div><span>{gifs.length} {gifs.length === 1 ? "memory" : "memories"}</span></div>
-            <GifGrid gifs={gifs} onReact={reactGif} />
-          </div>
         </section>
 
         <SiteChromeExtras />
