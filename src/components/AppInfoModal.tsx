@@ -65,6 +65,22 @@ const INFO_SECTIONS: InfoSection[] = [
     ],
   },
   {
+    title: "Homes and build guides",
+    items: [
+      "Share a Heartopia home photo or a YouTube walkthrough with a description.",
+      "Browse photo builds and video tutorials, then react to ideas you want to try.",
+      "Open a photo to see it larger with its details and reactions.",
+    ],
+  },
+  {
+    title: "Keep Hato Daily on your phone",
+    items: [
+      "Add the app to your home screen to open the village board with one tap.",
+      "On Android, use Install Hato Daily when it appears. On iPhone, open Share, then Add to Home Screen.",
+      "Your pseudo follows your connection, not an Hato Daily account. A new network or device may ask you to choose it again.",
+    ],
+  },
+  {
     title: "Keep it honest",
     items: [
       "Real in-game info only. No spam or off-topic stuff.",

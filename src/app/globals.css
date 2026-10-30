@@ -1618,6 +1618,7 @@ body {
 .build-feed-card :focus-visible,
 .builds-home-spotlight :focus-visible { outline: 3px solid #bb7186; outline-offset: 3px; }
 
+
 @media (max-width: 980px) {
   .build-feed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .builds-workspace { grid-template-columns: minmax(15rem, 0.38fr) minmax(0, 0.62fr); }
@@ -2550,4 +2551,103 @@ textarea.form-input { min-height: 76px; }
   .btn-submit,
   .btn-see-all,
   .runway-quiz-cta { animation: none !important; transition: none !important; }
+}
+
+/* Feed first: keep the journal frame calm while each community list moves on its own. */
+.pwa-install-wrap { display: none; position: relative; }
+.pwa-install-button { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; gap: 0.42rem; border: 1px solid #b65e73; border-radius: 12px; padding: 0.5rem 0.75rem; background: #e9859b; color: #422c35; box-shadow: 0 3px 0 #b65e73; font: inherit; font-size: 0.78rem; font-weight: 900; line-height: 1; cursor: pointer; transition: background-color 140ms ease, transform 140ms ease, box-shadow 140ms ease; }
+.pwa-install-button:hover { background: #f197a9; transform: translateY(-1px); box-shadow: 0 4px 0 #b65e73; }
+.pwa-install-button:active { transform: translateY(1px); box-shadow: 0 1px 0 #b65e73; }
+.pwa-install-button svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+.pwa-install-help { position: absolute; top: calc(100% + 0.55rem); right: 0; z-index: 80; width: min(290px, calc(100vw - 1.5rem)); border: 1px solid #e5c5ca; border-radius: 14px; padding: 0.85rem 2.4rem 0.85rem 0.9rem; background: #fffdf7; color: #455648; box-shadow: 0 8px 24px rgba(45, 58, 46, 0.2); font-size: 0.78rem; line-height: 1.45; }
+.pwa-install-help strong { display: block; margin-bottom: 0.25rem; color: #734456; font-family: var(--font-display); font-size: 0.86rem; }
+.pwa-install-help p { margin: 0; }
+.pwa-install-help-close { position: absolute; top: 0.4rem; right: 0.4rem; display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid #e5c5ca; border-radius: 50%; background: #fff; color: #624951; font: inherit; font-size: 1.2rem; cursor: pointer; }
+
+.app-info-fab { animation: info-invite-nudge 18s ease-in-out infinite !important; }
+.app-info-fab-tip { position: absolute; left: calc(100% + 0.7rem); bottom: 50%; width: max-content; max-width: min(260px, calc(100vw - 5.5rem)); border: 1px solid #e4d6a2; border-radius: 12px 12px 12px 4px; padding: 0.5rem 0.7rem; background: #fffdf7; color: #4d5947; box-shadow: 0 5px 15px rgba(47, 67, 54, 0.17); font-family: var(--font-nunito); font-size: 0.74rem; font-style: normal; font-weight: 850; line-height: 1.3; opacity: 0; pointer-events: none; transform: translateY(50%) translateY(5px) scale(0.97); transform-origin: left bottom; animation: info-tip-visit 24s ease-in-out infinite; }
+.app-info-fab:hover .app-info-fab-tip,
+.app-info-fab:focus-visible .app-info-fab-tip { opacity: 1; transform: translateY(50%) translateY(0) scale(1); animation: none; }
+@keyframes info-invite-nudge {
+  0%, 88%, 100% { transform: translateY(0); }
+  90% { transform: translateY(-6px); }
+  92% { transform: translateY(0); }
+  94% { transform: translateY(-3px); }
+  96% { transform: translateY(0); }
+}
+@keyframes info-tip-visit {
+  0%, 2% { opacity: 0; transform: translateY(50%) translateY(5px) scale(0.97); }
+  4%, 16% { opacity: 1; transform: translateY(50%) translateY(0) scale(1); }
+  19%, 100% { opacity: 0; transform: translateY(50%) translateY(5px) scale(0.97); }
+}
+
+@media (min-width: 981px) and (min-height: 760px) {
+  .home-page-root { height: 100dvh; min-height: 0; overflow: hidden; }
+  .home-app-shell { display: flex !important; height: 100dvh; min-height: 0; flex-direction: column; gap: 0.6rem; overflow: hidden; padding: 0.65rem 1rem 0.35rem !important; }
+  .home-app-shell > .site-header { flex: 0 0 auto; margin: 0 !important; }
+  .home-app-shell > .home-welcome { flex: 0 0 clamp(180px, 22vh, 220px); height: clamp(180px, 22vh, 220px); min-height: 0; margin: 0; padding: 1.15rem 1.45rem 3.55rem; }
+  .home-app-shell > .builds-home-spotlight { flex: 0 0 108px; height: 108px; min-height: 0; margin: 0; }
+  .home-app-shell > .home-dashboard { flex: 1 1 0; height: auto; min-height: 0; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 0.65rem; margin: 0; }
+  .home-dashboard .panel-card { display: flex; height: 100%; min-height: 0; flex-direction: column; overflow: hidden; margin: 0 !important; }
+  .home-dashboard .panel-heading { flex: 0 0 auto; }
+  .home-dashboard > .panel-card-sky .panel-scroll-area,
+  .home-dashboard .panel-card-pink .panel-scroll-area { flex: 1 1 0; min-height: 0; max-height: none !important; }
+  .home-dashboard-lower > .panel-card:first-child > form { min-height: 0; flex: 1 1 auto; overflow-y: auto; }
+  .home-app-shell > .site-footer { flex: 0 0 auto; margin: 0 !important; padding-top: 0.25rem !important; }
+
+  .gallery-shell,
+  .builds-shell { display: flex !important; height: 100dvh; min-height: 0; flex-direction: column; gap: 0.55rem; overflow: hidden; padding: 0.65rem 1rem 0.35rem !important; }
+  .gallery-shell > .site-header,
+  .builds-shell > .site-header { flex: 0 0 auto; margin: 0 !important; }
+  .gallery-shell > .pseudo-bar,
+  .builds-shell > .pseudo-bar { flex: 0 0 auto; margin: 0 !important; }
+  .gallery-shell .page-intro,
+  .builds-intro { flex: 0 0 auto; margin: 0 0 0.1rem; }
+  .gallery-workspace,
+  .builds-workspace { flex: 1 1 0; height: auto; min-height: 0; }
+  .gallery-upload-card,
+  .build-upload-card { position: static; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  .gallery-feed-card,
+  .build-feed-card { display: flex; min-height: 0; flex-direction: column; overflow: hidden; }
+  .gallery-feed-card .panel-scroll-area { max-height: none !important; min-height: 0; flex: 1 1 0; }
+  .build-feed-grid { min-height: 0; flex: 1 1 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 0.2rem; }
+  .gallery-shell > .site-footer,
+  .builds-shell > .site-footer { flex: 0 0 auto; margin: 0 !important; padding-top: 0.2rem !important; }
+}
+
+@media (max-width: 980px) {
+  .gallery-feed-card { display: flex; height: min(64dvh, 650px); min-height: 330px; flex-direction: column; overflow: hidden; }
+  .gallery-feed-card .panel-scroll-area { min-height: 0; max-height: none !important; flex: 1 1 0; }
+  .build-feed-card { display: flex; height: min(60dvh, 620px); min-height: 330px; flex-direction: column; overflow: hidden; }
+  .build-feed-grid { min-height: 0; flex: 1 1 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 0.15rem; }
+}
+
+@media (max-width: 680px) {
+  .site-header { position: sticky; top: 0; z-index: 35; border-radius: 0 0 16px 16px !important; box-shadow: 0 5px 18px rgba(47, 67, 54, 0.13) !important; }
+  .site-nav { flex-wrap: wrap; align-items: center; gap: 0.28rem; }
+  .site-nav-current,
+  .site-nav-link { min-height: 40px !important; padding: 0.42rem 0.58rem !important; font-size: 0.78rem !important; }
+  .pwa-install-wrap { display: inline-flex; }
+  .pwa-install-button { min-height: 40px; padding: 0.48rem 0.65rem; font-size: 0.76rem; }
+  .builds-shell { padding-bottom: 5rem !important; }
+  .gallery-workspace { grid-template-columns: minmax(0, 1fr); }
+  .gallery-feed-card { grid-row: 1; height: min(62dvh, 600px); min-height: 300px; }
+  .gallery-upload-card { grid-row: 2; }
+  .gallery-shell .page-intro { gap: 0.6rem; }
+  .gallery-shell .page-description { max-width: 26ch; font-size: 0.82rem; }
+  .build-feed-card { height: min(58dvh, 570px); min-height: 290px; }
+  .builds-intro { flex-wrap: wrap; gap: 0.45rem 0.75rem; }
+  .builds-intro-actions { display: flex; width: 100%; align-items: center; justify-content: space-between; }
+  .build-feed-tabs button { flex: 1 1 0; gap: 0.3rem; padding-inline: 0.45rem; font-size: 0.75rem; }
+  .builds-home-spotlight { grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.62fr); }
+  .app-info-fab-tip { max-width: calc(100vw - 5rem); font-size: 0.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-info-fab,
+  .app-info-fab-tip,
+  .pwa-install-button { animation: none !important; transition: none !important; }
+  .app-info-fab-tip { opacity: 0; }
+  .app-info-fab:hover .app-info-fab-tip,
+  .app-info-fab:focus-visible .app-info-fab-tip { opacity: 1; }
 }

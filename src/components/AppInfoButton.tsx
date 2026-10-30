@@ -25,6 +25,7 @@ export function AppInfoButton() {
       >
         <span className="app-info-fab-ring" aria-hidden="true" />
         <span className="app-info-fab-icon">i</span>
+        <span className="app-info-fab-tip" aria-hidden="true">New: homes and build guides</span>
       </button>
 
       <AppInfoModal open={open} onClose={() => setOpen(false)} />

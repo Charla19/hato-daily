@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { GameDayLabel } from "@/components/GameDayLabel";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 type SiteHeaderProps = {
   backHref?: string;
@@ -45,6 +46,7 @@ export function SiteHeader({
           ) : (
             (backHref || showGalleryLink) && <Link href="/builds" className="site-nav-link">Builds</Link>
           )}
+          <InstallAppButton />
         </nav>
 
         <GameDayLabel className="site-date" />

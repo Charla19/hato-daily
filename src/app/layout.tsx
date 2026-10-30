@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import { ClientProviders } from "@/components/ClientProviders";
 import "./globals.css";
@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   title: "Hato Daily | Heartopia dailies",
   description:
     "Heartopia daily discoveries, community looks, village photos, and house-build tutorials.",
+  appleWebApp: {
+    capable: true,
+    title: "Hato Daily",
+    statusBarStyle: "default",
+  },
+  icons: {
+    apple: "/icons/hato-192.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f8e4e7",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
