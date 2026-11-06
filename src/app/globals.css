@@ -3013,20 +3013,36 @@ textarea.form-input { min-height: 76px; }
 /* Give the desktop feed cards a definite grid row so their flex scrollers
    receive real height and the post cards stay visible. */
 @media (min-width: 981px) and (min-height: 760px) {
+  .gallery-shell,
+  .builds-shell {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
   .gallery-workspace,
   .builds-workspace {
     align-items: stretch !important;
-    grid-template-rows: minmax(0, 1fr);
+    flex: 0 0 auto !important;
+    height: auto !important;
+    grid-template-rows: auto;
   }
   .gallery-feed-card,
   .build-feed-card {
-    height: 100%;
-    min-height: 0;
+    height: min(90dvh, 800px);
+    min-height: min(90dvh, 800px);
   }
   .gallery-feed-card .panel-scroll-area,
   .build-feed-grid {
     flex: 1 1 auto;
     min-height: 0;
+  }
+  .gallery-upload-card,
+  .build-upload-card {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
   }
 }
 
