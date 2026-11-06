@@ -3010,6 +3010,26 @@ textarea.form-input { min-height: 76px; }
   }
 }
 
+/* Give the desktop feed cards a definite grid row so their flex scrollers
+   receive real height and the post cards stay visible. */
+@media (min-width: 981px) and (min-height: 760px) {
+  .gallery-workspace,
+  .builds-workspace {
+    align-items: stretch !important;
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .gallery-feed-card,
+  .build-feed-card {
+    height: 100%;
+    min-height: 0;
+  }
+  .gallery-feed-card .panel-scroll-area,
+  .build-feed-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
+
 /* A small anchored name editor should feel like a menu, not a second header. */
 .site-player-bar form {
   top: calc(100% + 0.4rem);
