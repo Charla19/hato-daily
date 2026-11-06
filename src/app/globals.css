@@ -2972,6 +2972,44 @@ textarea.form-input { min-height: 76px; }
   .build-feed-grid { grid-template-columns: minmax(0, 1fr) !important; }
 }
 
+/* On phones, let gallery and builds posts flow with the page instead of
+   trapping them in a viewport-sized nested scroller. */
+@media (max-width: 680px) {
+  .gallery-shell,
+  .builds-shell {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
+  .gallery-workspace,
+  .builds-workspace {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  .gallery-feed-card,
+  .build-feed-card {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  .gallery-feed-card .panel-scroll-area {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  .build-feed-grid {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+}
+
 /* A small anchored name editor should feel like a menu, not a second header. */
 .site-player-bar form {
   top: calc(100% + 0.4rem);
